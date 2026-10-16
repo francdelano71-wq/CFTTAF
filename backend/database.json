@@ -1,0 +1,54 @@
+{
+  "applications": [
+    {
+      "id": "app-1",
+      "reference": "TAF-2026-8421",
+      "fullName": "Kenfack Jean-Pierre",
+      "phone": "695123456",
+      "email": "kenfack.jp@example.cm",
+      "city": "Dschang",
+      "formationId": "1",
+      "formationTitle": "Photographie Professionnelle",
+      "educationLevel": "Baccalauréat",
+      "preferredContactMethod": "whatsapp",
+      "message": "Passionné de prise de vue studio et reportage photo.",
+      "privacyConsent": true,
+      "status": "new",
+      "createdAt": "2026-10-16T15:58:51.090Z"
+    }
+  ],
+  "contactMessages": [
+    {
+      "id": "msg-1",
+      "fullName": "M. Kamdem Lucas",
+      "phone": "699887766",
+      "email": "kamdem@enterprise.cm",
+      "subject": "Partenariat stage pour étudiants en Électricité & Froid",
+      "message": "Bonjour, notre entreprise à Bafoussam souhaite accueillir 3 stagiaires du CFP TAF pour la rentrée.",
+      "status": "new",
+      "createdAt": "2026-10-16T15:58:51.091Z"
+    }
+  ],
+  "settings": {
+    "schoolName": "Centre de Formation Professionnelle TAF – Bilingue",
+    "shortName": "CFP TAF",
+    "city": "Dschang",
+    "address": "Immeuble Supermarché Synergie, 2e étage, Dschang, Cameroun",
+    "slogan": "LE SAVOIR-FAIRE DEVIENT UN MÉTIER",
+    "diplomaPromise": "OBTIENS TON DQP, CQP, AQP EN 1 AN AVEC UN STAGE EN ENTREPRISE",
+    "inscriptionsOpen": true,
+    "inscriptionSession": "Session 2026/2027",
+    "primaryPhone": "695673710"
+  },
+  "auditLogs": [
+    {
+      "id": "log-1",
+      "action": "INIT",
+      "entityType": "SERVER",
+      "entityId": "0",
+      "details": "Démarrage du serveur REST API v1 pour CFP TAF.",
+      "author": "System",
+      "timestamp": "2026-10-16T15:58:51.091Z"
+    }
+  ]
+}
