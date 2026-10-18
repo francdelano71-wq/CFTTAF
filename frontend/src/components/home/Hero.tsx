@@ -57,6 +57,53 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate, onExploreClick }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
+  // Animation d'écriture et d'effacement avec surbrillance pour le grand titre
+  const heroTitles = [
+    settings.heroTitle || 'APPRENDS. PRATIQUE. DEVIENS PROFESSIONNEL.',
+    "18 FORMATIONS D'ÉLITE RECONNUES MINEFOP",
+    "OBTIENS TON DQP EN 1 AN AVEC UN STAGE RÉEL",
+    "LE SAVOIR-FAIRE DEVIENT UN VÉRITABLE MÉTIER"
+  ];
+
+  const [titleIdx, setTitleIdx] = useState(0);
+  const [displayedTitle, setDisplayedTitle] = useState('');
+  const [typePhase, setTypePhase] = useState<'typing' | 'paused' | 'highlighting' | 'deleting'>('typing');
+
+  useEffect(() => {
+    const currentFullTitle = heroTitles[titleIdx % heroTitles.length];
+    let timer: ReturnType<typeof setTimeout>;
+
+    if (typePhase === 'typing') {
+      if (displayedTitle.length < currentFullTitle.length) {
+        timer = setTimeout(() => {
+          setDisplayedTitle(currentFullTitle.slice(0, displayedTitle.length + 1));
+        }, 55);
+      } else {
+        // Pause de 2.2 secondes après l'écriture complète
+        timer = setTimeout(() => {
+          setTypePhase('highlighting');
+        }, 2200);
+      }
+    } else if (typePhase === 'highlighting') {
+      // Surbrillance dorée éclatante pendant 700ms avant l'effacement
+      timer = setTimeout(() => {
+        setTypePhase('deleting');
+      }, 700);
+    } else if (typePhase === 'deleting') {
+      if (displayedTitle.length > 0) {
+        timer = setTimeout(() => {
+          setDisplayedTitle(currentFullTitle.slice(0, displayedTitle.length - 1));
+        }, 25);
+      } else {
+        // Effacement terminé -> passage au titre suivant
+        setTypePhase('typing');
+        setTitleIdx((prev) => (prev + 1) % heroTitles.length);
+      }
+    }
+
+    return () => clearTimeout(timer);
+  }, [displayedTitle, typePhase, titleIdx, heroTitles]);
+
   // Rotation automatique toutes les 10 secondes
   useEffect(() => {
     if (isPaused) return;
@@ -104,9 +151,15 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate, onExploreClick }) => {
               <span>{settings.slogan}</span>
             </div>
 
-            {/* Main Headline */}
-            <h1 style={{ marginBottom: '18px', color: 'var(--taf-white)', textShadow: '0 3px 12px rgba(0,0,0,0.6)' }}>
-              {settings.heroTitle}
+            {/* Main Headline avec animation d'écriture, effacement et surbrillance */}
+            <h1 
+              className="hero-animated-title"
+              aria-label={settings.heroTitle}
+            >
+              <span className={typePhase === 'highlighting' || typePhase === 'deleting' ? 'hero-title-highlighted' : 'hero-title-normal'}>
+                {displayedTitle || '\u00A0'}
+              </span>
+              <span className="hero-typewriter-cursor" aria-hidden="true">|</span>
             </h1>
 
             {/* Institutional Promise Tag */}
