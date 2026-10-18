@@ -157,13 +157,18 @@ export const FormationsCatalogSection: React.FC<FormationsCatalogSectionProps> =
                 <div
                   style={{
                     position: 'absolute',
-                    top: '14px',
-                    left: '14px',
+                    top: '12px',
+                    left: '12px',
                     display: 'flex',
-                    gap: '6px'
+                    gap: '8px',
+                    alignItems: 'center',
+                    zIndex: 2
                   }}
                 >
-                  <span className="tag-badge tag-badge-gold">
+                  <span className="badge-formation-number">
+                    N° <span className="num-highlight">{f.number < 10 ? `0${f.number}` : f.number}</span>
+                  </span>
+                  <span className={`badge-formation-diploma diploma-${f.diplomaType === 'DQP' ? 'dqp' : f.diplomaType.includes('Certif') ? 'certif' : 'attestation'}`}>
                     {f.diplomaType}
                   </span>
                 </div>

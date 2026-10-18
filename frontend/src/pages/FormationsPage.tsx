@@ -188,12 +188,12 @@ export const FormationsPage: React.FC<FormationsPageProps> = ({ onNavigate }) =>
                     />
                     <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, transparent 35%, rgba(16, 13, 16, 0.95) 100%)' }} />
                     
-                    <div style={{ position: 'absolute', top: '12px', left: '12px', display: 'flex', gap: '8px' }}>
-                      <span className="tag-badge tag-badge-gold">
-                        {f.diplomaType}
+                    <div style={{ position: 'absolute', top: '12px', left: '12px', display: 'flex', gap: '8px', alignItems: 'center', zIndex: 2 }}>
+                      <span className="badge-formation-number">
+                        N° <span className="num-highlight">{f.number < 10 ? `0${f.number}` : f.number}</span>
                       </span>
-                      <span className="tag-badge" style={{ backgroundColor: 'rgba(0,0,0,0.7)', color: '#FFF' }}>
-                        N° {f.number}
+                      <span className={`badge-formation-diploma diploma-${f.diplomaType === 'DQP' ? 'dqp' : f.diplomaType.includes('Certif') ? 'certif' : 'attestation'}`}>
+                        {f.diplomaType}
                       </span>
                     </div>
 
@@ -311,22 +311,17 @@ export const FormationsPage: React.FC<FormationsPageProps> = ({ onNavigate }) =>
                         onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'rgba(245, 197, 27, 0.05)')}
                         onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = idx % 2 === 0 ? 'transparent' : 'rgba(255, 255, 255, 0.02)')}
                       >
-                        <td style={{ padding: '14px 16px', fontWeight: 700, color: 'var(--taf-gold)' }}>
-                          {f.number}
+                        <td style={{ padding: '14px 16px' }}>
+                          <span className="badge-formation-number" style={{ padding: '3px 8px', fontSize: '0.74rem' }}>
+                            N° <span className="num-highlight">{f.number < 10 ? `0${f.number}` : f.number}</span>
+                          </span>
                         </td>
                         <td style={{ padding: '14px 16px' }}>
                           <strong style={{ color: 'var(--taf-white)', display: 'block' }}>{f.title}</strong>
                           <span style={{ fontSize: '0.78rem', color: 'var(--taf-slate-400)' }}>{f.categoryName}</span>
                         </td>
                         <td style={{ padding: '14px 16px' }}>
-                          <span
-                            className="tag-badge"
-                            style={{
-                              backgroundColor: f.diplomaType === 'DQP' ? 'rgba(245, 197, 27, 0.15)' : 'rgba(255, 255, 255, 0.08)',
-                              color: f.diplomaType === 'DQP' ? 'var(--taf-gold)' : 'var(--taf-white)',
-                              border: f.diplomaType === 'DQP' ? '1px solid var(--taf-gold-border)' : '1px solid rgba(255, 255, 255, 0.12)'
-                            }}
-                          >
+                          <span className={`badge-formation-diploma diploma-${f.diplomaType === 'DQP' ? 'dqp' : f.diplomaType.includes('Certif') ? 'certif' : 'attestation'}`} style={{ padding: '3px 8px', fontSize: '0.74rem' }}>
                             {f.diplomaType}
                           </span>
                         </td>

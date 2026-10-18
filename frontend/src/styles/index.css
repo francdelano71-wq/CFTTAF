@@ -283,14 +283,74 @@ p {
 }
 
 .tag-badge-gold {
-  background: var(--taf-gold-subtle);
+  background: rgba(245, 197, 27, 0.2);
   color: var(--taf-gold);
-  border: 1px solid var(--taf-gold-border);
+  border: 1px solid var(--taf-gold);
 }
 
 .tag-badge-plum {
   background: var(--taf-plum);
   color: var(--taf-white);
+}
+
+/* Badges officiels pour les cartes & widgets de formations */
+.badge-formation-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0c090e;
+  background: linear-gradient(135deg, #18111b 0%, #08060a 100%);
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1.5px solid rgba(245, 197, 27, 0.5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+}
+
+.badge-formation-number .num-highlight {
+  color: #f5c51b;
+  font-weight: 900;
+  margin-left: 2px;
+}
+
+.badge-formation-diploma {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 0.78rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 4px 11px;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.badge-formation-diploma.diploma-dqp {
+  background-color: #f5c51b;
+  background: linear-gradient(135deg, #f5c51b 0%, #dfa506 100%);
+  color: #050505;
+  border: 1.5px solid #ffe885;
+}
+
+.badge-formation-diploma.diploma-certif {
+  background-color: #0284c7;
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  color: #ffffff;
+  border: 1.5px solid #7dd3fc;
+}
+
+.badge-formation-diploma.diploma-attestation {
+  background-color: #7e22ce;
+  background: linear-gradient(135deg, #7e22ce 0%, #581c87 100%);
+  color: #ffffff;
+  border: 1.5px solid #d8b4fe;
 }
 
 /* ==========================================================================

@@ -50,13 +50,16 @@ export const FormationDetailPage: React.FC<FormationDetailPageProps> = ({ slug, 
           <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '40px', alignItems: 'center' }}>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px', flexWrap: 'wrap' }}>
-                <span className="tag-badge tag-badge-gold">
-                  {formation.diplomaType}
+                <span className="badge-formation-number" style={{ padding: '5px 12px', fontSize: '0.82rem' }}>
+                  Filière N° <span className="num-highlight">{formation.number < 10 ? `0${formation.number}` : formation.number}</span>
+                </span>
+                <span className={`badge-formation-diploma diploma-${formation.diplomaType === 'DQP' ? 'dqp' : formation.diplomaType.includes('Certif') ? 'certif' : 'attestation'}`} style={{ padding: '5px 14px', fontSize: '0.82rem' }}>
+                  Diplôme : {formation.diplomaType}
                 </span>
                 <span className="tag-badge">
                   {formation.categoryName}
                 </span>
-                <span className="tag-badge" style={{ backgroundColor: 'rgba(16, 185, 129, 0.15)', color: '#34D399', border: '1px solid rgba(16, 185, 129, 0.3)' }}>
+                <span className="tag-badge" style={{ backgroundColor: 'rgba(16, 185, 129, 0.2)', color: '#34D399', border: '1px solid rgba(16, 185, 129, 0.4)' }}>
                   Inscriptions Ouvertes
                 </span>
               </div>
