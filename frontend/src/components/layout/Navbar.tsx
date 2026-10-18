@@ -13,7 +13,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
 
   const navItems = [
     { label: 'Accueil', path: '/' },
-    { label: 'Nos Formations', path: '/formations', badge: '16' },
+    { label: 'Nos Formations', path: '/formations', badge: '18' },
     { label: 'À Propos', path: '/a-propos' },
     { label: 'Admissions', path: '/admissions' },
     { label: 'Contact', path: '/contact' }

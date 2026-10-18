@@ -27,10 +27,10 @@ export const FormationsCatalogSection: React.FC<FormationsCatalogSectionProps> =
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '20px', marginBottom: '36px' }}>
           <div>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--taf-gold)', fontWeight: 600, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '10px' }}>
-              <span>Offre Pédagogique Officielle</span>
+              <span>Offre Pédagogique Officielle MINEFOP</span>
             </div>
             <h2 style={{ color: 'var(--taf-white)' }}>
-              16 Formations Professionnelles d'Élite
+              18 Formations Professionnelles d'Élite
             </h2>
           </div>
 
@@ -39,7 +39,7 @@ export const FormationsCatalogSection: React.FC<FormationsCatalogSectionProps> =
             <Search size={18} style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: 'var(--taf-slate-400)' }} />
             <input
               type="text"
-              placeholder="Rechercher une formation, compétence..."
+              placeholder="Rechercher une filière, compétence..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="form-input"
@@ -78,7 +78,7 @@ export const FormationsCatalogSection: React.FC<FormationsCatalogSectionProps> =
             }}
             className="btn-tactile"
           >
-            Toutes les formations (16)
+            Toutes les filières (18)
           </button>
 
           {CATEGORIES.map((cat) => {
@@ -92,7 +92,7 @@ export const FormationsCatalogSection: React.FC<FormationsCatalogSectionProps> =
                   padding: '10px 18px',
                   borderRadius: '6px',
                   fontFamily: 'var(--font-display)',
-                  fontSize: '0.95rem',
+                  fontSize: '0.92rem',
                   textTransform: 'uppercase',
                   letterSpacing: '0.03em',
                   fontWeight: 600,
@@ -108,7 +108,7 @@ export const FormationsCatalogSection: React.FC<FormationsCatalogSectionProps> =
                 }}
                 className="btn-tactile"
               >
-                <span>{cat.name}</span>
+                <span>{cat.shortName || cat.name}</span>
                 <span
                   style={{
                     fontSize: '0.75rem',
@@ -198,13 +198,14 @@ export const FormationsCatalogSection: React.FC<FormationsCatalogSectionProps> =
                   </div>
                 </div>
 
-                {/* Duration & Access Footer */}
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.82rem', color: 'var(--taf-slate-400)', marginBottom: '18px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <Clock size={14} style={{ color: 'var(--taf-gold)' }} />
-                    <span>{f.durationText}</span>
+                {/* Official Durations Strip */}
+                <div style={{ backgroundColor: 'rgba(0, 0, 0, 0.35)', borderRadius: '6px', padding: '8px 12px', border: '1px solid rgba(255, 255, 255, 0.05)', marginBottom: '16px', fontSize: '0.8rem', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--taf-slate-300)' }}>
+                    <span>⏱️ Centre : <strong>{f.coursCentreDuration}</strong></span>
+                    <span>🏢 Stage : <strong style={{ color: 'var(--taf-gold)' }}>{f.stageDuration}</strong></span>
                   </div>
-                  <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid rgba(255, 255, 255, 0.06)', paddingTop: '4px', color: 'var(--taf-slate-400)', fontSize: '0.78rem' }}>
+                    <span>Cycle complet : <strong style={{ color: '#10B981' }}>{f.dureeTotale}</strong></span>
                     <span>Niveau : {f.accessConditions[0]}</span>
                   </div>
                 </div>

@@ -11,44 +11,44 @@ const HERO_SCREENSHOTS = [
   {
     src: '/brand/section-a.png',
     title: 'Photographie Professionnelle',
-    category: 'Audiovisuel & Création Numérique',
+    category: '1. Pôle Audiovisuel & Photo',
     desc: 'Prise de vue studio, reportage, éclairage et post-traitement.',
-    path: '/formations/photographie-pro'
+    path: '/formations/photographe-professionnel'
   },
   {
     src: '/brand/section-b.png',
-    title: 'Design Graphique',
-    category: 'Audiovisuel & Création Numérique',
+    title: 'Graphisme de Production & PAO',
+    category: '2. Pôle Montage, Design & Web',
     desc: 'Identités visuelles, chartes graphiques, édition et communication.',
-    path: '/formations/design-graphique'
+    path: '/formations/graphisme-production-pao'
   },
   {
     src: '/brand/section-c.png',
-    title: 'Montage Audiovisuel',
-    category: 'Audiovisuel & Création Numérique',
+    title: 'Montage Audiovisuel & Vidéo',
+    category: '2. Pôle Montage, Design & Web',
     desc: 'Rythme narratif, assemblage vidéo, étalonnage et post-production.',
-    path: '/formations/montage-audiovisuel'
+    path: '/formations/montage-audiovisuel-realisation'
   },
   {
     src: '/brand/section-d.png',
-    title: 'Webmaster & Plateformes Web',
-    category: 'Cyber & Digital',
+    title: 'Webmaster & Conception Web',
+    category: '2. Pôle Montage, Design & Web',
     desc: 'Création, intégration, CMS, déploiement et maintenance web.',
-    path: '/formations/webmaster'
+    path: '/formations/webmaster-conception-web'
   },
   {
     src: '/brand/section-e.png',
-    title: 'Technicien de Son',
-    category: 'Audiovisuel & Création Numérique',
+    title: 'Technicien de Son (TAF)',
+    category: '1. Pôle Audiovisuel & Photo',
     desc: 'Studio et plateau, mixage multipiste, acoustique et mastering.',
-    path: '/formations/technicien-son'
+    path: '/formations/technicien-de-son'
   },
   {
     src: '/brand/section-f.png',
     title: 'Secrétariat de Direction',
-    category: 'Administration & Gestion',
+    category: '5. Pôle Secrétariat & Direction',
     desc: 'Assistance stratégique, coordination d\'équipe et gestion de direction.',
-    path: '/formations/secretariat-direction'
+    path: '/formations/secretariat-de-direction'
   }
 ];
 

@@ -38,7 +38,7 @@ export const NotFoundPage: React.FC<NotFoundPageProps> = ({ onNavigate }) => {
         </h1>
 
         <p style={{ color: 'var(--taf-slate-300)', fontSize: '1rem', lineHeight: 1.6, marginBottom: '28px' }}>
-          L'adresse demandée n'existe pas ou la page a été déplacée. Retrouvez nos 16 formations professionnelles ou revenez à la page d'accueil.
+          L'adresse demandée n'existe pas ou la page a été déplacée. Retrouvez nos 18 formations professionnelles ou revenez à la page d'accueil.
         </p>
 
         <div style={{ display: 'flex', justifyContent: 'center', gap: '14px' }}>

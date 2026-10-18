@@ -218,7 +218,7 @@ export const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ initialFormation
                 {/* Formation souhaitée */}
                 <div className="form-group">
                   <label className="form-label" htmlFor="formationSlug">
-                    Formation souhaitée (16 filières) <span className="req">*</span>
+                    Filière de formation souhaitée (18 filières officielles MINEFOP) <span className="req">*</span>
                   </label>
                   <select
                     id="formationSlug"
@@ -226,10 +226,10 @@ export const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ initialFormation
                     value={formData.formationSlug}
                     onChange={(e) => setFormData({ ...formData, formationSlug: e.target.value })}
                   >
-                    <option value="">-- Sélectionnez une formation --</option>
+                    <option value="">-- Sélectionnez une filière officielle --</option>
                     {FORMATIONS.map(f => (
                       <option key={f.slug} value={f.slug}>
-                        {f.title} ({f.categoryName})
+                        N°{f.number} • {f.title} ({f.diplomaType} — {f.dureeTotale})
                       </option>
                     ))}
                   </select>

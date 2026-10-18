@@ -60,7 +60,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </li>
               <li>
                 <button onClick={() => handleNav('/formations')} style={{ color: 'var(--taf-slate-300)', textAlign: 'left' }} className="hover:text-gold">
-                  Catalogue des 16 formations
+                  Catalogue officiel des 18 formations
                 </button>
               </li>
               <li>

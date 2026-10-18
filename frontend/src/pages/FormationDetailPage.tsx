@@ -226,25 +226,43 @@ export const FormationDetailPage: React.FC<FormationDetailPageProps> = ({ slug, 
                     <span style={{ color: 'var(--taf-slate-400)', display: 'block', fontSize: '0.8rem', textTransform: 'uppercase' }}>
                       Diplôme Préparé
                     </span>
-                    <strong style={{ color: 'var(--taf-gold)', fontSize: '1rem' }}>
-                      {formation.diplomaType} (Cadre MINEFOP)
+                    <strong style={{ color: 'var(--taf-gold)', fontSize: '1.05rem' }}>
+                      {formation.diplomaType} (Cadre Officiel MINEFOP)
                     </strong>
                   </div>
 
                   <div>
                     <span style={{ color: 'var(--taf-slate-400)', display: 'block', fontSize: '0.8rem', textTransform: 'uppercase' }}>
-                      Durée de formation
+                      ⏱️ Cours Théoriques & Pratiques en Centre
                     </span>
-                    <strong style={{ color: 'var(--taf-white)' }}>
-                      {formation.durationText}
+                    <strong style={{ color: 'var(--taf-white)', fontSize: '0.95rem' }}>
+                      {formation.coursCentreDuration}
                     </strong>
                   </div>
 
                   <div>
                     <span style={{ color: 'var(--taf-slate-400)', display: 'block', fontSize: '0.8rem', textTransform: 'uppercase' }}>
-                      Stage pratique en entreprise
+                      🏢 Stage Pratique en Entreprise
                     </span>
-                    <strong style={{ color: 'var(--taf-white)' }}>
+                    <strong style={{ color: 'var(--taf-gold)', fontSize: '0.95rem' }}>
+                      {formation.stageDuration}
+                    </strong>
+                  </div>
+
+                  <div>
+                    <span style={{ color: 'var(--taf-slate-400)', display: 'block', fontSize: '0.8rem', textTransform: 'uppercase' }}>
+                      Durée Globale du Cycle
+                    </span>
+                    <strong style={{ color: '#10B981', fontSize: '0.95rem' }}>
+                      {formation.dureeTotale} (Immersion complète)
+                    </strong>
+                  </div>
+
+                  <div>
+                    <span style={{ color: 'var(--taf-slate-400)', display: 'block', fontSize: '0.8rem', textTransform: 'uppercase' }}>
+                      Modalités du Stage en Entreprise
+                    </span>
+                    <strong style={{ color: 'var(--taf-slate-200)', fontSize: '0.85rem', lineHeight: 1.5, display: 'block', marginTop: '4px' }}>
                       {formation.stageInfo}
                     </strong>
                   </div>

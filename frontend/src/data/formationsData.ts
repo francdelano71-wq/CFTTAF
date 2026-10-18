@@ -1,9 +1,11 @@
 export interface Formation {
   id: string;
+  number: number;
   slug: string;
   title: string;
-  categoryId: 'audiovisuel' | 'cyber-digital' | 'administration' | 'technique' | 'esthetique';
+  categoryId: string;
   categoryName: string;
+  poleNumber: number;
   shortDescription: string;
   fullDescription: string;
   coverImage: string;
@@ -11,588 +13,731 @@ export interface Formation {
   careerOutcomes: string[];
   accessConditions: string[];
   durationText: string;
+  coursCentreDuration: string;
+  stageDuration: string;
+  dureeTotale: string;
   stageInfo: string;
   tools: string[];
   featured: boolean;
   sortOrder: number;
   seoTitle: string;
   seoDescription: string;
-  diplomaType: string;
+  diplomaType: 'DQP' | 'Attestation' | 'Certif. Tech.' | string;
 }
 
 export interface Category {
   id: string;
   name: string;
+  shortName: string;
   slug: string;
   description: string;
   coverImage: string;
   iconName: string;
+  poleNumber: number;
 }
 
 export const CATEGORIES: Category[] = [
   {
-    id: 'audiovisuel',
-    name: 'Audiovisuel & Création Numérique',
-    slug: 'audiovisuel-creation',
-    description: 'Devenez un professionnel de l\'image, du son et de la réalisation dans un secteur en pleine expansion.',
+    id: 'audiovisuel-musique',
+    name: '1. Pôle Audiovisuel, Musique & Arts Photographiques',
+    shortName: 'Audiovisuel & Photo',
+    slug: 'audiovisuel-musique-photo',
+    description: 'Techniques du son, régie DJ, prise de vue technique en studio et laboratoire photo numérique.',
     coverImage: '/images/categories/audiovisuel.jpg',
-    iconName: 'Camera'
+    iconName: 'Camera',
+    poleNumber: 1
   },
   {
-    id: 'cyber-digital',
-    name: 'Cybersécurité & Communication Numérique',
-    slug: 'cyber-communication',
-    description: 'Protégez les infrastructures numériques et pilotez l\'acquisition et la visibilité des organisations.',
+    id: 'montage-design-info',
+    name: '2. Pôle Montage Vidéo, Design & Informatique',
+    shortName: 'Montage, Design & Web',
+    slug: 'montage-design-informatique',
+    description: 'Montage cinématographique, infographie PAO, conception de sites web et développement applicatif.',
     coverImage: '/images/categories/cyber_digital.jpg',
-    iconName: 'ShieldCheck'
+    iconName: 'Video',
+    poleNumber: 2
   },
   {
-    id: 'administration',
-    name: 'Administration & Secrétariat',
-    slug: 'administration-secretariat',
-    description: 'Maîtrisez la gestion administrative bilingue, l\'assistance de direction et la rigueur comptable.',
-    coverImage: '/images/categories/administration.jpg',
-    iconName: 'Briefcase'
-  },
-  {
-    id: 'technique',
-    name: 'Métiers Techniques & Énergie',
-    slug: 'metiers-techniques',
-    description: 'Des savoir-faire techniques indispensables : climatisation, électricité, plomberie et transition solaire.',
+    id: 'maintenance-electricite',
+    name: '3. Pôle Maintenance, Électricité & Énergie',
+    shortName: 'Maintenance & Électricité',
+    slug: 'maintenance-electricite-plomberie',
+    description: 'Maintenance des parcs informatiques, administration réseau, électricité bâtiment et plomberie sanitaire.',
     coverImage: '/images/categories/technique.jpg',
-    iconName: 'Wrench'
+    iconName: 'Wrench',
+    poleNumber: 3
   },
   {
-    id: 'esthetique',
-    name: 'Beauté & Esthétique',
-    slug: 'beaute-esthetique',
-    description: 'L\'expertise des soins, du bien-être et de la cosmétologie professionnelle.',
-    coverImage: '/images/categories/esthetique.jpg',
-    iconName: 'Sparkles'
+    id: 'solaire-centrale-gestion',
+    name: '4. Pôle Énergies Solaire, Centrale Électrique & Gestion',
+    shortName: 'Solaire & Gestion',
+    slug: 'energies-solaires-gestion',
+    description: 'Installations photovoltaïques, maintenance solaire, conduite de centrale électrique et comptabilité OHADA.',
+    coverImage: '/images/categories/technique.jpg',
+    iconName: 'Zap',
+    poleNumber: 4
+  },
+  {
+    id: 'secretariat-administration',
+    name: '5. Pôle Secrétariat & Administration',
+    shortName: 'Secrétariat & Direction',
+    slug: 'secretariat-administration',
+    description: 'Secrétariat bureautique bilingue, gestion administrative et assistance stratégique de direction.',
+    coverImage: '/images/categories/administration.jpg',
+    iconName: 'Briefcase',
+    poleNumber: 5
   }
 ];
 
 export const FORMATIONS: Formation[] = [
-  // A. Audiovisuel & Création Numérique
+  // =========================================================================
+  // 1. PÔLE AUDIOVISUEL, MUSIQUE & ARTS PHOTOGRAPHIQUES
+  // =========================================================================
   {
     id: '1',
-    slug: 'photographie-professionnelle',
-    title: 'Photographie Professionnelle',
-    categoryId: 'audiovisuel',
-    categoryName: 'Audiovisuel & Création Numérique',
-    shortDescription: 'Maîtrise de la prise de vue studio, du reportage institutionnel, de l\'éclairage et du post-traitement d\'images.',
-    fullDescription: 'La formation en Photographie Professionnelle du CFP TAF forme des photographes capables d\'intervenir en studio, sur le terrain ou pour des marques. Vous apprendrez la gestion manuelle de la lumière, la composition photographique, la direction de modèles, le reportage événementiel et le flux de retouche numérique professionnel.',
-    coverImage: '/images/categories/audiovisuel.jpg',
+    number: 1,
+    slug: 'technicien-de-son',
+    title: 'Technicien de Son (TAF)',
+    categoryId: 'audiovisuel-musique',
+    categoryName: 'Pôle Audiovisuel, Musique & Arts Photographiques',
+    poleNumber: 1,
+    shortDescription: 'Captation, prise de son, sonorisation d\'événements et traitement acoustique sur bancs de montage audio et consoles numériques.',
+    fullDescription: 'Cette formation prépare des techniciens du son polyvalents et immédiatement opérationnels. Les apprenants maîtrisent l\'installation et le réglage des microphones selon les configurations acoustiques, l\'exploitation des consoles numériques de mixage, la prise de son en studio, l\'enregistrement d\'instruments et le traitement du signal audio pour le live, le broadcast et la post-production.',
+    coverImage: '/brand/section-e.png',
     skills: [
-      'Gestion optique, exposition manuelle et balance des blancs',
-      'Éclairage studio (flashs, modeleurs, lumière continue)',
-      'Photographie de portrait, produit et reportage d\'action',
-      'Développement RAW et retouche éditoriale sur Lightroom & Photoshop',
-      'Gestion d\'archives et constitution d\'un book professionnel'
+      'Installation, réglage des microphones et gestion des consoles de mixage',
+      'Prise de son en studio, enregistrement d\'instruments et enregistrement direct',
+      'Traitement du signal, mixage audio et post-production sonore',
+      'Sonorisation d\'événements en direct, traitement acoustique et retours de scène'
     ],
     careerOutcomes: [
-      'Photographe de studio indépendant',
-      'Photographe de presse et photojournaliste',
-      'Photographe événementiel et de mode',
-      'Opérateur de prise de vue pour agences de communication'
+      'Technicien son studio et scène',
+      'Opérateur prise de son (Radio, Télévision, Cinéma)',
+      'Sound designer et régisseur audio'
     ],
-    accessConditions: ['BEPC', 'CAP', 'Baccalauréat', 'GCE O/A Level (à confirmer lors de l\'entretien)'],
-    durationText: '1 an (selon référentiel DQP/CQP préparé)',
-    stageInfo: 'Stage pratique en entreprise ou agence partenaire inclus dans le cursus.',
-    tools: ['Boîtiers DSLR & Mirrorless professionnels', 'Flashs studio & softboxes', 'Adobe Photoshop', 'Adobe Lightroom'],
+    accessConditions: ['BEPC', 'CAP', 'Baccalauréat', 'GCE O/A Level'],
+    durationText: '9 mois en centre (1 080h) + 3 mois de stage en entreprise',
+    coursCentreDuration: '9 mois (1 080 heures)',
+    stageDuration: '3 mois (12 semaines)',
+    dureeTotale: '12 mois',
+    stageInfo: 'Immersion de 12 semaines en studio d\'enregistrement professionnel, station de radio, chaîne TV ou entreprise événementielle partenaire.',
+    tools: ['Consoles numériques (Yamaha, Behringer X32)', 'Pro Tools', 'Logic Pro', 'Microphones Neumann, Shure, Rode', 'Processeurs DSP'],
     featured: true,
     sortOrder: 1,
-    seoTitle: 'Formation Photographie Professionnelle à Dschang | CFP TAF',
-    seoDescription: 'Devenez photographe professionnel certifié à Dschang au Centre de Formation Professionnelle TAF. Studio, reportage, retouche et stage en entreprise.',
-    diplomaType: 'DQP / CQP / AQP'
+    seoTitle: 'Formation Technicien de Son (DQP) à Dschang | CFP TAF',
+    seoDescription: 'Devenez technicien de son qualifié (DQP MINEFOP) à Dschang. 9 mois de pratique studio + 3 mois de stage en entreprise au CFP TAF.',
+    diplomaType: 'DQP'
   },
   {
     id: '2',
-    slug: 'design-graphique',
-    title: 'Design Graphique',
-    categoryId: 'audiovisuel',
-    categoryName: 'Audiovisuel & Création Numérique',
-    shortDescription: 'Conception d\'identités visuelles percutantes, chartes graphiques, supports d\'édition et communication de marque.',
-    fullDescription: 'Cette filière prépare des designers graphiques capables de concevoir des identités visuelles fortes, des affiches, des maquettes éditoriales et des visuels pour supports imprimés et numériques. Vous développerez votre œil typographique, votre sens des couleurs et la maîtrise complète des logiciels standards de l\'industrie créative.',
-    coverImage: '/images/hero_cinematic.jpg',
+    number: 2,
+    slug: 'animateur-musical-dj',
+    title: 'Animateur Musical & Disc-Jockey',
+    categoryId: 'audiovisuel-musique',
+    categoryName: 'Pôle Audiovisuel, Musique & Arts Photographiques',
+    poleNumber: 1,
+    shortDescription: 'Animation d\'événements publics/privés, programmation musicale, maîtrise des régies DJ et techniques d\'expression orale.',
+    fullDescription: 'Formation intensive dédiée aux professionnels de l\'ambiance et de la musique. Vous apprenez la maîtrise des régies sonores, des platines DJ professionnelles, des contrôleurs numériques et logiciels de pointe (Serato, Traktor), ainsi que la programmation harmonique, les transitions rythmiques et l\'art de l\'animation micro pour scènes, radios et grands événements.',
+    coverImage: '/images/categories/audiovisuel.jpg',
     skills: [
-      'Création de logos et systèmes d\'identité visuelle',
-      'Typographie éditoriale, mise en page et théorie des couleurs',
-      'Conception de supports print (affiches, dépliants, catalogues, packaging)',
-      'Design d\'éléments pour réseaux sociaux et plateformes web',
-      'Préparation des fichiers pour l\'imprimerie industrielle (pré-presse)'
+      'Maîtrise des régies son, Platines DJ, contrôleurs et logiciels (Serato, Traktor)',
+      'Programmation et enchaînement harmonique des registres musicaux',
+      'Techniques d\'animation micro, gestion d\'ambiance et éclairage scénique de base',
+      'Câblage, sécurité sonore et gestion des retours'
     ],
     careerOutcomes: [
-      'Graphiste / Designer visuel en agence',
-      'Directeur artistique junior',
-      'Designer graphique freelance',
-      'Infographiste d\'édition et d\'imprimerie'
+      'Animateur musical professionnel',
+      'DJ professionnel (Clubs, festivals, réceptions)',
+      'Animateur radio et présentateur événementiel'
     ],
-    accessConditions: ['BEPC', 'Baccalauréat', 'GCE O/A Level'],
-    durationText: '1 an avec stage professionnel',
-    stageInfo: 'Immersion en agence de communication, imprimerie ou studio graphique.',
-    tools: ['Adobe Illustrator', 'Adobe Photoshop', 'Adobe InDesign', 'Figma'],
-    featured: true,
+    accessConditions: ['CEP', 'BEPC', 'CAP', 'Baccalauréat'],
+    durationText: '6 mois en centre (720h) + 2 mois de stage en entreprise',
+    coursCentreDuration: '6 mois (720 heures)',
+    stageDuration: '2 mois (8 semaines)',
+    dureeTotale: '8 mois',
+    stageInfo: 'Stage de 8 semaines en station de radio locale, club de prestige ou auprès de prestataires événementiels majeurs.',
+    tools: ['Contrôleurs Pioneer DJ', 'Serato DJ Pro', 'Traktor Pro', 'Casques professionnels Sennheiser', 'Micros sans fil HF'],
+    featured: false,
     sortOrder: 2,
-    seoTitle: 'Formation Design Graphique à Dschang | CFP TAF',
-    seoDescription: 'Apprenez le graphisme, l\'identité visuelle et l\'infographie à Dschang. Formation pratique au CFP TAF avec stage en entreprise.',
-    diplomaType: 'DQP / CQP'
+    seoTitle: 'Formation Animateur Musical & DJ à Dschang | CFP TAF',
+    seoDescription: 'Formation pratique DJ et animateur musical à Dschang. 6 mois de cours pratiques + 2 mois de stage avec régie son professionnelle.',
+    diplomaType: 'Attestation'
   },
   {
     id: '3',
-    slug: 'montage-audiovisuel',
-    title: 'Montage Audiovisuel',
-    categoryId: 'audiovisuel',
-    categoryName: 'Audiovisuel & Création Numérique',
-    shortDescription: 'Rythme narratif, assemblage vidéo professionnel, étalonnage colorimétrique et post-production vidéo.',
-    fullDescription: 'Le monteur vidéo est le conteur final du projet audiovisuel. Cette formation vous enseigne l\'art du raccord, le sens du rythme, le découpage narratif, l\'étalonnage des couleurs, le mixage audio pour la vidéo et l\'intégration de titrages et d\'animations d\'habillage.',
-    coverImage: '/images/hero_cinematic.jpg',
+    number: 3,
+    slug: 'photographe-professionnel',
+    title: 'Photographe Professionnel',
+    categoryId: 'audiovisuel-musique',
+    categoryName: 'Pôle Audiovisuel, Musique & Arts Photographiques',
+    poleNumber: 1,
+    shortDescription: 'Maîtrise de la prise de vue technique en studio et en extérieur, gestion de la lumière et post-traitement d\'images.',
+    fullDescription: 'Cette formation forme des photographes créatifs et techniquement accomplis. Les apprenants explorent la maîtrise manuelle des boîtiers professionnels, la gestion de la profondeur de champ, le cadrage, l\'éclairage de studio (flashs, diffuseurs, boîtes à lumière) ainsi que le développement numérique RAW et la retouche de précision sous Lightroom et Photoshop.',
+    coverImage: '/brand/section-a.png',
     skills: [
-      'Dérushage, organisation et montage narratif multi-caméras',
-      'Techniques de transition et synchronisation image/son',
-      'Étalonnage colorimétrique (color grading et correspondances caméra)',
-      'Animation de titrages et habillage visuel (Motion design basique)',
-      'Exportations et normes de diffusion TV, cinéma et réseaux sociaux'
+      'Gestion du cadrage, de l\'exposition, de la profondeur de champ et des objectifs',
+      'Éclairage de studio (flashs, réflecteurs, boîtes à lumière) pour portrait et produit',
+      'Retouche numérique et développement RAW (Lightroom, Photoshop)',
+      'Reportage extérieur, photographie institutionnelle et événementielle'
     ],
     careerOutcomes: [
-      'Monteur vidéo cinéma et télévision',
-      'Monteur de clips musicaux et documentaires',
-      'Créateur de contenus vidéo pour marques et créateurs',
-      'Technicien de post-production audiovisuelle'
+      'Photographe de studio indépendant ou salarié',
+      'Reporter-photographe et photojournaliste',
+      'Photographe événementiel et corporate'
     ],
     accessConditions: ['BEPC', 'CAP', 'Baccalauréat', 'GCE O/A Level'],
-    durationText: '1 an de formation pratique',
-    stageInfo: 'Stage d\'application sur des projets de production réels ou chaînes partenaires.',
-    tools: ['Adobe Premiere Pro', 'DaVinci Resolve', 'Adobe After Effects'],
+    durationText: '9 mois en centre (1 080h) + 3 mois de stage en entreprise',
+    coursCentreDuration: '9 mois (1 080 heures)',
+    stageDuration: '3 mois (12 semaines)',
+    dureeTotale: '12 mois',
+    stageInfo: 'Stage de 12 semaines en studio photo de référence, agence de communication ou organe de presse.',
+    tools: ['Boîtiers plein format Canon/Sony/Nikon', 'Flashs de studio Godox/Elinchrom', 'Lightroom Classic', 'Adobe Photoshop'],
     featured: true,
     sortOrder: 3,
-    seoTitle: 'Formation Montage Audiovisuel à Dschang | CFP TAF',
-    seoDescription: 'Formez-vous au montage vidéo professionnel et à l\'étalonnage à Dschang. Logiciels pro, projets réels et stage garanti.',
-    diplomaType: 'DQP / CQP'
+    seoTitle: 'Formation Photographe Professionnel (DQP) à Dschang | CFP TAF',
+    seoDescription: 'Obtenez votre DQP de Photographe Professionnel à Dschang au CFP TAF. Studio équipé, flashs, retouche RAW et stage garanti.',
+    diplomaType: 'DQP'
   },
   {
     id: '4',
-    slug: 'maintenance-audiovisuelle',
-    title: 'Maintenance Audiovisuelle',
-    categoryId: 'audiovisuel',
-    categoryName: 'Audiovisuel & Création Numérique',
-    shortDescription: 'Diagnostic, câblage, entretien préventif et dépannage des équipements de prise de son, lumière et vidéo.',
-    fullDescription: 'Un pôle audiovisuel performant repose sur des équipements fiables. La formation en Maintenance Audiovisuelle forme des techniciens spécialisés dans le diagnostic, la réparation, le calibrage et l\'installation des régies vidéo, bancs de montage, projecteurs, caméras et chaînes audio.',
+    number: 4,
+    slug: 'operateur-laboratoire-photo',
+    title: 'Opérateur de Laboratoire Photographique',
+    categoryId: 'audiovisuel-musique',
+    categoryName: 'Pôle Audiovisuel, Musique & Arts Photographiques',
+    poleNumber: 1,
+    shortDescription: 'Traitement technique des tirages, gestion des chaînes d\'impression photo numériques, étalonnage et finition des supports.',
+    fullDescription: 'Spécialisation axée sur le tirage d\'art et l\'impression photo numérique professionnelle. Vous apprendrez la gestion de la chaîne graphique de laboratoire, le calibrage d\'écrans, la gestion des profils colorimétriques ICC, la préparation prépresse, l\'exploitation des traceurs grand format, ainsi que le contrecollage, la plastification et la finition des tirages.',
     coverImage: '/images/categories/audiovisuel.jpg',
     skills: [
-      'Diagnostic électrique et électronique des appareils audiovisuels',
-      'Soudure et confection de câbles audio/vidéo (XLR, BNC, HDMI, DMX)',
-      'Maintenance préventive des capteurs, optiques et consoles',
-      'Installation et configuration de régies de diffusion et de streaming',
-      'Sécurité électrique appliquée aux plateaux de tournage'
+      'Développement, tirage numérique et gestion de la chaîne graphique de laboratoire',
+      'Étalonnage des couleurs, gestion des profils ICC et préparation prépresse photo',
+      'Finition, plastification, contrecollage et contrôle qualité des imprimés',
+      'Maintenance préventive des traceurs jet d\'encre et minilabs numériques'
     ],
     careerOutcomes: [
-      'Technicien de maintenance régie et plateau',
-      'Responsable de parc matériel audiovisuel',
-      'Technicien d\'assistance dans les chaînes de télévision et radios',
-      'Prestataire de maintenance technique d\'équipements de spectacle'
+      'Technicien de laboratoire photo',
+      'Opérateur d\'impression numérique grand format',
+      'Responsable de production print en imprimerie numérique'
     ],
-    accessConditions: ['CAP', 'BEPC', 'Baccalauréat technique', 'GCE O/A Level'],
-    durationText: '1 an pratique',
-    stageInfo: 'Stage en studio de production, chaîne TV, radio ou entreprise événementielle.',
-    tools: ['Multimètres & oscilloscopes', 'Stations de soudage pro', 'Générateurs de mires', 'Testeurs de câbles'],
+    accessConditions: ['CEP', 'BEPC', 'CAP', 'Baccalauréat'],
+    durationText: '6 mois en centre (720h) + 2 mois de stage en entreprise',
+    coursCentreDuration: '6 mois (720 heures)',
+    stageDuration: '2 mois (8 semaines)',
+    dureeTotale: '8 mois',
+    stageInfo: 'Stage pratique de 8 semaines en laboratoire photo numérique, imprimerie offset/numérique ou atelier de tirage d\'art.',
+    tools: ['Traceurs Epson / Canon grand format', 'Calibreurs colorimétriques X-Rite', 'Plastifieuses à chaud et à froid', 'Logiciels RIP d\'impression'],
     featured: false,
     sortOrder: 4,
-    seoTitle: 'Formation Maintenance Audiovisuelle à Dschang | CFP TAF',
-    seoDescription: 'Spécialisez-vous dans la maintenance, l\'installation et le dépannage des systèmes audiovisuels au CFP TAF à Dschang.',
-    diplomaType: 'DQP / CQP / AQP'
+    seoTitle: 'Formation Opérateur de Laboratoire Photo à Dschang | CFP TAF',
+    seoDescription: 'Apprenez le tirage d\'art et la gestion des chaînes d\'impression photo numériques au CFP TAF Dschang. 6 mois cours + 2 mois stage.',
+    diplomaType: 'Attestation'
   },
+
+  // =========================================================================
+  // 2. PÔLE MONTAGE VIDÉO, DESIGN & INFORMATIQUE
+  // =========================================================================
   {
     id: '5',
-    slug: 'technicien-de-son',
-    title: 'Technicien de Son (Record, Mix, Mastering)',
-    categoryId: 'audiovisuel',
-    categoryName: 'Audiovisuel & Création Numérique',
-    shortDescription: 'Prise de son studio et plateau, mixage multipiste, acoustique et mastering audio aux standards internationaux.',
-    fullDescription: 'La formation Technicien de Son met l\'accent sur les trois piliers essentiels du métier : le Recording (prise de son vocale et instrumentale, captation plateau), le Mixing (équilibre spectral, compression, spatialisation, effets) et le Mastering (optimisation dynamique pour streaming et radiodiffusion).',
-    coverImage: '/images/categories/audiovisuel.jpg',
+    number: 5,
+    slug: 'montage-audiovisuel-realisation',
+    title: 'Montage Audiovisuel & Réalisation Vidéo',
+    categoryId: 'montage-design-info',
+    categoryName: 'Pôle Montage Vidéo, Design & Informatique',
+    poleNumber: 2,
+    shortDescription: 'Captation vidéo, scénarisation, montage numérique professionnel, étalonnage et habillage graphique d\'images animées.',
+    fullDescription: 'Une formation complète pour devenir réalisateur et monteur vidéo recherché. De la scénarisation à la prise de vue avec caméras cinéma professionnelles (éclairage 3 points, mouvements de caméra stabilisés), jusqu\'au montage virtuel sur Premiere Pro et DaVinci Resolve, vous maîtriserez l\'art du rythme visuel, l\'étalonnage colorimétrique et l\'habillage graphique.',
+    coverImage: '/brand/section-c.png',
     skills: [
-      'Prise de son studio et perche sur plateau de tournage',
-      'Acoustique appliquée et choix/placement des micros (statiques, dynamiques, cravates)',
-      'Mixage multipiste avancé sur station audionumérique (DAW)',
-      'Traitement du signal : égalisation, compression multibande, réverbe',
-      'Mastering audio et respect des normes LUFS pour le broadcast et le streaming'
+      'Prise de vue vidéo, cadrage, mouvements de caméra et éclairage 3 points',
+      'Montage virtuel (Premiere Pro, DaVinci), synchronisation et mixage audio',
+      'Étalonnage, effets visuels de base, titrage et exportation multi-formats',
+      'Scénarisation, découpage technique et réalisation de projets audiovisuels'
     ],
     careerOutcomes: [
-      'Ingénieur du son studio d\'enregistrement',
-      'Perchiste / Opérateur son de tournage',
-      'Technicien son live et régisseur sonorisation',
-      'Monteur son et designer sonore pour le cinéma'
+      'Monteur vidéo professionnel (TV, Cinéma, Web)',
+      'Cadreur / Cameraman de plateau et de reportage',
+      'Vidéaste web, créateur de contenus et réalisateur indépendant'
     ],
     accessConditions: ['BEPC', 'CAP', 'Baccalauréat', 'GCE O/A Level'],
-    durationText: '1 an de spécialisation audio',
-    stageInfo: 'Stage pratique en studio d\'enregistrement professionnel ou radio.',
-    tools: ['Consoles de mixage analogiques et numériques', 'Pro Tools / Logic Pro / Cubase', 'Parc microphonique professionnel', 'Plugins de mastering de référence'],
+    durationText: '9 mois en centre (1 080h) + 3 mois de stage en entreprise',
+    coursCentreDuration: '9 mois (1 080 heures)',
+    stageDuration: '3 mois (12 semaines)',
+    dureeTotale: '12 mois',
+    stageInfo: 'Stage de 12 semaines au sein d\'une maison de production audiovisuelle, agence de communication ou chaîne de télévision.',
+    tools: ['Adobe Premiere Pro', 'DaVinci Resolve Studio', 'After Effects', 'Caméras cinéma 4K Blackmagic/Sony', 'Gimbals DJI Ronin'],
     featured: true,
     sortOrder: 5,
-    seoTitle: 'Formation Technicien de Son (Record, Mix, Mastering) à Dschang | CFP TAF',
-    seoDescription: 'Apprenez la prise de son, le mixage et le mastering à Dschang. Formation audio d\'excellence avec studio équipé et stage.',
-    diplomaType: 'DQP / CQP'
+    seoTitle: 'Formation Montage Audiovisuel & Vidéo (DQP) à Dschang | CFP TAF',
+    seoDescription: 'Obtenez votre DQP en Montage Audiovisuel et Réalisation Vidéo à Dschang. Caméras 4K, bancs de montage DaVinci et Premiere Pro.',
+    diplomaType: 'DQP'
   },
   {
     id: '6',
-    slug: 'webmaster',
-    title: 'Webmaster',
-    categoryId: 'audiovisuel',
-    categoryName: 'Audiovisuel & Création Numérique',
-    shortDescription: 'Création, intégration, administration et maintenance technique de sites internet et plateformes web.',
-    fullDescription: 'Le Webmaster assure la création, la refonte, la sécurisation et la gestion quotidienne des sites web des entreprises et institutions. Vous apprendrez l\'intégration web moderne, la gestion des serveurs, l\'administration de CMS, la maintenance technique et l\'optimisation pour les moteurs de recherche.',
-    coverImage: '/images/categories/cyber_digital.jpg',
+    number: 6,
+    slug: 'graphisme-production-pao',
+    title: 'Graphisme de Production & PAO',
+    categoryId: 'montage-design-info',
+    categoryName: 'Pôle Montage Vidéo, Design & Informatique',
+    poleNumber: 2,
+    shortDescription: 'Conception visuelle, identité de marque, illustration vectorielle, retouche d\'image et préparation technique à l\'impression.',
+    fullDescription: 'Formation de référence pour concevoir des identités de marque percutantes et maîtriser toute la chaîne graphique. Vous développerez une expertise approfondie de la suite Adobe (Photoshop, Illustrator, InDesign), de la typographie éditoriale, de la création de logos et chartes graphiques, ainsi que des règles techniques d\'imposition et de contrôle prépresse.',
+    coverImage: '/brand/section-b.png',
     skills: [
-      'Intégration HTML5 sémantique, CSS moderne et JavaScript',
-      'Déploiement et personnalisation de CMS (WordPress, solutions e-commerce)',
-      'Gestion des hébergements web, noms de domaine, DNS et certificats SSL',
-      'Maintenance technique préventive, sauvegardes et dépannage',
-      'Optimisation de la vitesse de chargement et bases du SEO technique'
+      'Création de charte graphique, logos, affiches, dépliants et packaging',
+      'Maîtrise experte de la suite Adobe (Photoshop, Illustrator, InDesign)',
+      'Gestion de la chaîne graphique, imposition et contrôle prépresse',
+      'Conception d\'assets digitaux pour réseaux sociaux et communication de marque'
     ],
     careerOutcomes: [
-      'Webmaster pour entreprises et PME',
-      'Intégrateur web junior',
-      'Gestionnaire de site e-commerce',
-      'Prestataire webmastering indépendant'
+      'Graphiste maquettiste en agence ou entreprise',
+      'Designer visuel et illustrateur de marque',
+      'Exécutant PAO en imprimerie ou maison d\'édition'
     ],
-    accessConditions: ['BEPC', 'Baccalauréat', 'GCE O/A Level'],
-    durationText: '1 an avec immersion professionnelle',
-    stageInfo: 'Stage au sein d\'une agence web, d\'une entreprise digitale ou d\'un service informatique.',
-    tools: ['HTML5 / CSS3 / JavaScript', 'WordPress & WooCommerce', 'Outils FTP & Panneaux cPanel/Plesk', 'Git'],
-    featured: false,
+    accessConditions: ['BEPC', 'CAP', 'Baccalauréat', 'GCE O/A Level'],
+    durationText: '9 mois en centre (1 080h) + 3 mois de stage en entreprise',
+    coursCentreDuration: '9 mois (1 080 heures)',
+    stageDuration: '3 mois (12 semaines)',
+    dureeTotale: '12 mois',
+    stageInfo: 'Stage de 12 semaines en agence de communication visuelle, studio de design graphique ou imprimerie moderne.',
+    tools: ['Adobe Illustrator', 'Adobe Photoshop', 'Adobe InDesign', 'Tablettes graphiques Wacom', 'Nuanciers Pantone'],
+    featured: true,
     sortOrder: 6,
-    seoTitle: 'Formation Webmaster à Dschang | CFP TAF',
-    seoDescription: 'Devenez Webmaster à Dschang : création de sites internet, administration, hébergement et référencement web au CFP TAF.',
-    diplomaType: 'DQP / CQP'
+    seoTitle: 'Formation Graphisme de Production & PAO (DQP) à Dschang | CFP TAF',
+    seoDescription: 'Formation DQP Graphisme et PAO à Dschang au CFP TAF. Identités visuelles, packaging, Illustrator, InDesign et stage professionnel.',
+    diplomaType: 'DQP'
   },
-
-  // B. Cybersécurité & Communication Numérique
   {
     id: '7',
-    slug: 'cyber-securite',
-    title: 'Cyber Sécurité',
-    categoryId: 'cyber-digital',
-    categoryName: 'Cybersécurité & Communication Numérique',
-    shortDescription: 'Protection des systèmes informatiques, défense des réseaux, sensibilisation aux menaces et sécurisation des données.',
-    fullDescription: 'Face à la montée des cybermenaces au Cameroun et en Afrique, cette formation prépare des techniciens capables de configurer des réseaux sécurisés, de détecter les vulnérabilités, d\'appliquer les politiques de protection des données et de réagir en cas d\'incident informatique.',
-    coverImage: '/images/categories/cyber_digital.jpg',
+    number: 7,
+    slug: 'webmaster-conception-web',
+    title: 'Webmaster & Conception Web',
+    categoryId: 'montage-design-info',
+    categoryName: 'Pôle Montage Vidéo, Design & Informatique',
+    poleNumber: 2,
+    shortDescription: 'Création, administration, référencement et maintenance de sites web statiques et dynamiques.',
+    fullDescription: 'Cette formation apprend à concevoir, administrer et pérenniser des sites web modernes. Les apprenants s\'approprient l\'intégration web sémantique (HTML5, CSS3, JavaScript moderne), la création de sites et boutiques sous WordPress, l\'optimisation du référencement naturel (SEO) et la gestion technique d\'hébergements, noms de domaine et sécurité SSL.',
+    coverImage: '/brand/section-d.png',
     skills: [
-      'Architecture des réseaux informatiques et protocoles de communication',
-      'Configuration des pare-feu (Firewall), VPN et systèmes de détection d\'intrusion',
-      'Identification des vulnérabilités et principes de test d\'intrusion éthique',
-      'Sécurisation des postes de travail, serveurs et terminaux mobiles',
-      'Procédures de sauvegarde chiffrée et plan de continuité d\'activité'
+      'Intégration web (HTML5, CSS3, JavaScript) et CMS (WordPress)',
+      'Optimisation du référencement naturel (SEO) et webdesign ergonomique (UI/UX)',
+      'Gestion d\'hébergement, sécurisation et mises à jour de sites internet',
+      'Maintenance technique, sauvegardes et dépannage de plateformes web'
     ],
     careerOutcomes: [
-      'Technicien support cybersécurité',
-      'Administrateur junior sécurité des réseaux',
-      'Consultant en hygiène informatique pour PME',
-      'Opérateur SOC (Security Operations Center) junior'
+      'Webmaster d\'entreprise ou d\'organisation',
+      'Intégrateur web et gestionnaire de sites CMS',
+      'Administrateur de plateformes e-commerce et de portails'
     ],
-    accessConditions: ['Baccalauréat scientifique ou technique', 'GCE A Level (ou équivalent avec test d\'aptitude)'],
-    durationText: '1 an intensif',
-    stageInfo: 'Stage pratique en DSI d\'entreprise, opérateur télécoms ou cabinet de services informatiques.',
-    tools: ['Linux (Kali, Ubuntu Server)', 'Wireshark & Nmap', 'Firewalls pfsense / Fortinet', 'Outils de chiffrement'],
+    accessConditions: ['BEPC', 'Baccalauréat', 'GCE O/A Level'],
+    durationText: '9 mois en centre (1 080h) + 3 mois de stage en entreprise',
+    coursCentreDuration: '9 mois (1 080 heures)',
+    stageDuration: '3 mois (12 semaines)',
+    dureeTotale: '12 mois',
+    stageInfo: 'Stage de 12 semaines en agence web, entreprise de services numériques (ESN) ou département informatique d\'entreprise.',
+    tools: ['VS Code', 'WordPress & WooCommerce', 'Figma', 'Git / GitHub', 'cPanel / Plesk', 'Google Search Console'],
     featured: true,
     sortOrder: 7,
-    seoTitle: 'Formation Cyber Sécurité à Dschang | CFP TAF',
-    seoDescription: 'Protégez les données et réseaux informatiques. Formation pratique en Cyber Sécurité à Dschang avec certification DQP/CQP.',
-    diplomaType: 'DQP / CQP'
+    seoTitle: 'Formation Webmaster & Conception Web (DQP) à Dschang | CFP TAF',
+    seoDescription: 'Devenez Webmaster certifié (DQP MINEFOP) à Dschang. HTML5, CSS3, WordPress, SEO, hébergement web et stage garanti.',
+    diplomaType: 'DQP'
   },
   {
     id: '8',
-    slug: 'marketing-digital-community-management',
-    title: 'Marketing Digital et Community Management',
-    categoryId: 'cyber-digital',
-    categoryName: 'Cybersécurité & Communication Numérique',
-    shortDescription: 'Stratégie de contenu, animation de communautés, publicité en ligne (Ads), acquisition et analyse de performance.',
-    fullDescription: 'Ce programme forme les stratèges de la visibilité numérique. Vous apprendrez à concevoir des campagnes sur les réseaux sociaux, à fédérer des communautés engagées, à piloter la réputation d\'une organisation et à gérer des budgets publicitaires rentables sur Meta, Google et TikTok.',
+    number: 8,
+    slug: 'developpement-applications',
+    title: 'Développement d\'Applications',
+    categoryId: 'montage-design-info',
+    categoryName: 'Pôle Montage Vidéo, Design & Informatique',
+    poleNumber: 2,
+    shortDescription: 'Conception, programmation logicielle, développement web/mobile et gestion des bases de données.',
+    fullDescription: 'Plongez au cœur de l\'ingénierie logicielle. Vous apprendrez à analyser les besoins clients, à modéliser des bases de données relationnelles (UML, Merise, SQL), à programmer en orienté objet avec Python, PHP, Java et JavaScript, et à concevoir, tester et déployer des applications web et mobiles robustes et sécurisées.',
     coverImage: '/images/categories/cyber_digital.jpg',
     skills: [
-      'Élaboration d\'une stratégie éditoriale et calendrier de publication',
-      'Création de contenus percutants (visuels, textes, vidéos courtes)',
-      'Gestion et modération des communautés (Facebook, Instagram, LinkedIn, TikTok)',
-      'Paramétrage de campagnes publicitaires ciblées (Meta Ads, Google Ads)',
-      'Analyse des indicateurs clés (ROI, engagement, portée) et reporting client'
+      'Analyse des besoins et modélisation logique de bases de données (UML/Merise)',
+      'Programmation Orientée Objet (Python, PHP, Java, JavaScript)',
+      'Tests, débogage et déploiement d\'applications fonctionnelles',
+      'Conception d\'API RESTful, requêtes SQL et architecture logicielle'
     ],
     careerOutcomes: [
-      'Community Manager en entreprise ou agence',
-      'Responsable acquisition digitale',
-      'Social Media Strategist indépendant',
-      'Gestionnaire de marque et e-réputation'
+      'Développeur d\'applications logicielles',
+      'Développeur Web Full-Stack / Backend',
+      'Développeur d\'applications mobiles'
     ],
-    accessConditions: ['BEPC', 'Baccalauréat', 'GCE O/A Level'],
-    durationText: '1 an de formation orientée résultats',
-    stageInfo: 'Stage au sein d\'agences de marketing, d\'ONG, de startups ou de PME de la région.',
-    tools: ['Meta Business Suite', 'Google Analytics', 'Canva Pro & CapCut', 'Outils de programmation social media'],
-    featured: false,
+    accessConditions: ['Baccalauréat C, D, TI ou équivalent', 'GCE A Level scientifique'],
+    durationText: '9 mois en centre (1 080h) + 3 mois de stage en entreprise',
+    coursCentreDuration: '9 mois (1 080 heures)',
+    stageDuration: '3 mois (12 semaines)',
+    dureeTotale: '12 mois',
+    stageInfo: 'Stage de 12 semaines en entreprise de développement de logiciels, startup technologique ou bureau d\'ingénierie informatique.',
+    tools: ['VS Code / IntelliJ', 'Python / PHP / JavaScript', 'MySQL / PostgreSQL', 'Git & GitHub', 'Postman', 'Docker'],
+    featured: true,
     sortOrder: 8,
-    seoTitle: 'Formation Marketing Digital et Community Management | CFP TAF',
-    seoDescription: 'Développez votre expertise en réseaux sociaux, publicité en ligne et communication digitale au CFP TAF Dschang.',
-    diplomaType: 'DQP / CQP'
+    seoTitle: 'Formation Développement d\'Applications (DQP) à Dschang | CFP TAF',
+    seoDescription: 'Devenez Développeur d\'Applications qualifié au CFP TAF Dschang. POO, Python, PHP, bases de données, applications web et mobiles.',
+    diplomaType: 'DQP'
   },
 
-  // C. Administration & Secrétariat
+  // =========================================================================
+  // 3. PÔLE MAINTENANCE, ÉLECTRICITÉ & ÉNERGIE
+  // =========================================================================
   {
     id: '9',
-    slug: 'secretariat-bureautique-bilingue',
-    title: 'Secrétariat Bureautique Bilingue',
-    categoryId: 'administration',
-    categoryName: 'Administration & Secrétariat',
-    shortDescription: 'Maîtrise bilingue français-anglais des outils bureautiques, accueil d\'élite et rédaction professionnelle.',
-    fullDescription: 'Atout stratégique au Cameroun et à l\'international, le secrétariat bureautique bilingue forme des collaborateurs capables d\'assurer l\'accueil physique et téléphonique bilingue, la rédaction de correspondances administratives irréprochables en français et en anglais, ainsi que la gestion experte des logiciels bureautiques.',
-    coverImage: '/images/categories/administration.jpg',
+    number: 9,
+    slug: 'maintenance-informatique',
+    title: 'Maintenance Informatique',
+    categoryId: 'maintenance-electricite',
+    categoryName: 'Pôle Maintenance, Électricité & Énergie',
+    poleNumber: 3,
+    shortDescription: 'Diagnostic, assemblage, réparation matérielle, installation de systèmes d\'exploitation et maintenance logicielle.',
+    fullDescription: 'Le technicien informatique est le garant du bon fonctionnement des outils de travail numériques. Cette formation vous enseigne l\'assemblage complet d\'ordinateurs, le diagnostic précis des pannes matérielles (carte mère, mémoire, disque, alimentation), l\'installation et l\'optimisation des systèmes Windows/Linux, la désinfection de logiciels malveillants et la sauvegarde des données.',
+    coverImage: '/images/categories/technique.jpg',
     skills: [
-      'Communication professionnelle bilingue français/anglais écrite et orale',
-      'Maîtrise avancée du traitement de texte, tableur et présentations',
-      'Gestion des courriers entrants et sortants, archivage physique et électronique',
-      'Tenue d\'agendas partagés et accueil des usagers et partenaires',
-      'Organisation logistique des réunions et comptes rendus'
+      'Assemblage d\'ordinateurs, diagnostic de pannes et remplacement de composants',
+      'Installation, configuration et nettoyage de systèmes Windows/Linux',
+      'Sauvegarde de données, suppression de logiciels malveillants et maintenance préventive',
+      'Gestion thermique, entretien physique des circuits et dépannage des périphériques'
     ],
     careerOutcomes: [
-      'Secrétaire bureautique bilingue',
-      'Agent d\'accueil et d\'information institutionnel',
-      'Assistant(e) administratif(ve) en entreprise binationale ou ONG',
-      'Chargé(e) de suivi des dossiers administratifs'
+      'Technicien de maintenance informatique',
+      'Technicien support Helpdesk / Assistance utilisateurs',
+      'Responsable de parc informatique en entreprise'
     ],
-    accessConditions: ['CAP', 'BEPC', 'Baccalauréat', 'GCE O/A Level'],
-    durationText: '1 an avec stage pratique',
-    stageInfo: 'Stage en entreprise privée, collectivité locale, établissement scolaire ou ONG.',
-    tools: ['Microsoft Word, Excel, PowerPoint', 'Outils de messagerie professionnelle', 'Scanners & périphériques réseau'],
-    featured: true,
+    accessConditions: ['CEP', 'BEPC', 'CAP', 'Baccalauréat'],
+    durationText: '9 mois en centre (1 080h) + 3 mois de stage en entreprise',
+    coursCentreDuration: '9 mois (1 080 heures)',
+    stageDuration: '3 mois (12 semaines)',
+    dureeTotale: '12 mois',
+    stageInfo: 'Stage de 12 semaines au service informatique d\'une grande entreprise, administration publique ou atelier de maintenance informatique.',
+    tools: ['Multimètres numériques', 'Kits d\'outils de précision', 'Testeurs d\'alimentations', 'Logiciels de diagnostic matériel (MemTest, CrystalDisk)'],
+    featured: false,
     sortOrder: 9,
-    seoTitle: 'Formation Secrétariat Bureautique Bilingue à Dschang | CFP TAF',
-    seoDescription: 'Formation bilingue d\'excellence en secrétariat et bureautique à Dschang. Double compétence français/anglais et stage.',
-    diplomaType: 'DQP / CQP / AQP'
+    seoTitle: 'Formation Maintenance Informatique (DQP) à Dschang | CFP TAF',
+    seoDescription: 'Formation pratique en Maintenance Informatique au CFP TAF Dschang. Dépannage hardware, OS, sécurité et stage professionnel.',
+    diplomaType: 'DQP'
   },
   {
     id: '10',
-    slug: 'secretariat-de-direction',
-    title: 'Secrétariat de Direction',
-    categoryId: 'administration',
-    categoryName: 'Administration & Secrétariat',
-    shortDescription: 'Assistance stratégique aux hauts dirigeants, gestion des priorités, confidentialité et coordination d\'équipe.',
-    fullDescription: 'Véritable bras droit de la direction générale, l\'assistant(e) de direction gère les flux d\'informations confidentielles, optimise l\'agenda de ses supérieurs, prépare les conseils d\'administration et assure la coordination fluide entre les différents départements de l\'organisation.',
-    coverImage: '/images/categories/administration.jpg',
+    number: 10,
+    slug: 'maintenance-reseau-informatique',
+    title: 'Maintenance Réseau Informatique',
+    categoryId: 'maintenance-electricite',
+    categoryName: 'Pôle Maintenance, Électricité & Énergie',
+    poleNumber: 3,
+    shortDescription: 'Déploiement, configuration, sécurisation et administration des infrastructures réseaux d\'entreprise.',
+    fullDescription: 'Spécialisez-vous dans la mise en place et l\'administration des réseaux d\'entreprise. Vous apprendrez le câblage cuivre et fibre, le brassage de baies de serveurs, la configuration des commutateurs et routeurs, la gestion des plans d\'adressage IP, des sous-réseaux et VLANs, ainsi que la sécurisation des accès et la mise en place de VPN d\'entreprise.',
+    coverImage: '/images/categories/cyber_digital.jpg',
     skills: [
-      'Filtrage rigoureux des communications et respect strict de la confidentialité',
-      'Coordination des voyages, missions et plannings des directeurs',
-      'Rédaction de procès-verbaux, rapports de synthèse et notes de cadrage',
-      'Veille informationnelle et préparation des dossiers de décision',
-      'Gestion des relations protocolaires et événements d\'entreprise'
+      'Câblage réseau, brassage de baies et configuration des commutateurs/routeurs',
+      'Configuration de réseaux LAN/WLAN, adressage IP, sous-réseaux et VPN',
+      'Gestion des accès, sécurité réseau et supervision du trafic',
+      'Diagnostic des pannes de connectivité et sécurisation pare-feu'
     ],
     careerOutcomes: [
-      'Secrétaire / Assistant(e) de direction générale',
-      'Office Manager de PME/Grande entreprise',
-      'Assistant(e) exécutif(ve) de projets internationaux',
-      'Coordonnateur(rice) administratif(ve)'
+      'Technicien réseau et télécoms',
+      'Administrateur réseau junior en entreprise',
+      'Technicien d\'infrastructure et câblage structuré'
     ],
-    accessConditions: ['Baccalauréat', 'GCE A Level', 'BEPC avec expérience'],
-    durationText: '1 an pratique',
-    stageInfo: 'Immersion directe auprès de directions d\'entreprises ou administrations partenaires.',
-    tools: ['Suites bureautiques collaboratives', 'Outils de planification d\'équipe', 'ERP administratifs'],
-    featured: false,
+    accessConditions: ['BEPC', 'Baccalauréat scientifique/technique', 'GCE O/A Level'],
+    durationText: '9 mois en centre (1 080h) + 3 mois de stage en entreprise',
+    coursCentreDuration: '9 mois (1 080 heures)',
+    stageDuration: '3 mois (12 semaines)',
+    dureeTotale: '12 mois',
+    stageInfo: 'Stage de 12 semaines auprès d\'un fournisseur d\'accès internet, opérateur télécom ou au service réseau d\'une grande organisation.',
+    tools: ['Testeurs de câbles et réflectomètres', 'Pinces à sertir pro', 'Équipements Cisco / MikroTik', 'Wireshark', 'Packet Tracer'],
+    featured: true,
     sortOrder: 10,
-    seoTitle: 'Formation Secrétariat de Direction à Dschang | CFP TAF',
-    seoDescription: 'Devenez Assistant(e) de Direction qualifié(e) à Dschang. Formation de haut niveau en gestion de direction et coordination.',
-    diplomaType: 'DQP / CQP'
+    seoTitle: 'Formation Maintenance Réseau Informatique (DQP) à Dschang | CFP TAF',
+    seoDescription: 'Devenez Technicien Réseau certifié (DQP MINEFOP) au CFP TAF Dschang. Câblage, switchs, routeurs, VPN et sécurité d\'entreprise.',
+    diplomaType: 'DQP'
   },
   {
     id: '11',
-    slug: 'secretariat-comptable',
-    title: 'Secrétariat Comptable',
-    categoryId: 'administration',
-    categoryName: 'Administration & Secrétariat',
-    shortDescription: 'Tenue des écritures comptables de base, facturation, suivi de trésorerie et déclarations fiscales OHADA.',
-    fullDescription: 'À la croisée de l\'administration et des finances, le secrétaire comptable enregistre les pièces justificatives, gère la facturation clients/fournisseurs, effectue le rapprochement bancaire et prépare les déclarations courantes conformément au système comptable OHADA.',
-    coverImage: '/images/categories/administration.jpg',
+    number: 11,
+    slug: 'electricite-du-batiment',
+    title: 'Électricité du Bâtiment',
+    categoryId: 'maintenance-electricite',
+    categoryName: 'Pôle Maintenance, Électricité & Énergie',
+    poleNumber: 3,
+    shortDescription: 'Réalisation, câblage, mise en service et maintenance des installations électriques dans les bâtiments.',
+    fullDescription: 'Le métier fondamental du génie électrique appliqué au bâtiment. Cette formation pratique forme des électriciens capables de lire et concevoir des schémas unifilaires et multifilaires, de réaliser la pose de conduits et le tirage de câbles, de raccorder les tableaux électriques de distribution, d\'assurer la mise à la terre et de dépanner rapidement toute installation.',
+    coverImage: '/images/categories/technique.jpg',
     skills: [
-      'Saisie et vérification des écritures comptables d\'achats, ventes et trésorerie',
-      'Établissement des factures, relances impayés et gestion de la caisse',
-      'Rapprochements bancaires et états de rapprochement périodiques',
-      'Préparation des fiches de paie simples et déclarations sociales (CNPS)',
-      'Maîtrise des logiciels de comptabilité de référence'
+      'Lecture et réalisation de schémas électriques unifilaires et multifilaires',
+      'Pose de conduits, tirage de câbles et raccordement de tableaux électriques',
+      'Contrôle de conformité, mise à la terre et dépannage d\'urgence',
+      'Installation d\'éclairages, prises, disjoncteurs différentiels et inverseurs'
     ],
     careerOutcomes: [
-      'Secrétaire comptable en entreprise',
-      'Aide-comptable en cabinet d\'expertise comptable',
-      'Gestionnaire de caisse et de facturation',
-      'Gestionnaire administratif et financier de PME'
+      'Électricien bâtiment (résidentiel et tertiaire)',
+      'Monteur-câbleur de tableaux et armoires électriques',
+      'Agent de maintenance électrique d\'immeuble ou complexe'
     ],
-    accessConditions: ['BEPC', 'CAP Commercial', 'Baccalauréat', 'GCE O/A Level'],
-    durationText: '1 an avec stage comptable',
-    stageInfo: 'Stage d\'application en cabinet comptable ou service financier d\'entreprise.',
-    tools: ['Logiciels de comptabilité (Sage Saari, etc.)', 'Excel avancé (tableaux croisés, formules)', 'Plateformes fiscales'],
+    accessConditions: ['CEP', 'BEPC', 'CAP'],
+    durationText: '7 mois en centre (840h) + 2 mois de stage en entreprise',
+    coursCentreDuration: '7 mois (840 heures)',
+    stageDuration: '2 mois (8 semaines)',
+    dureeTotale: '9 mois',
+    stageInfo: 'Stage de 8 semaines sur chantiers de construction de bâtiments, entreprises de BTP ou sociétés d\'installation électrique.',
+    tools: ['Pinces dénudeuses et coupe-câbles isolées 1000V', 'Vérificateurs d\'absence de tension (VAT)', 'Telluromètres (mesureurs de terre)', 'Perforateurs'],
     featured: false,
     sortOrder: 11,
-    seoTitle: 'Formation Secrétariat Comptable à Dschang | CFP TAF',
-    seoDescription: 'Apprenez la gestion comptable, la facturation et la paie OHADA à Dschang au Centre TAF. Stage en entreprise inclus.',
-    diplomaType: 'DQP / CQP'
+    seoTitle: 'Formation Électricité du Bâtiment à Dschang | CFP TAF',
+    seoDescription: 'Formation qualifiante en Électricité du Bâtiment à Dschang. Câblage, tableaux, schémas, mise à la terre et stage sur chantier.',
+    diplomaType: 'Attestation'
   },
-
-  // D. Métiers Techniques & Énergie
   {
     id: '12',
-    slug: 'froid-et-climatisation',
-    title: 'Froid et Climatisation',
-    categoryId: 'technique',
-    categoryName: 'Métiers Techniques & Énergie',
-    shortDescription: 'Installation, maintenance préventive et dépannage frigorifique (chambres froides, climatiseurs splits, réfrigération).',
-    fullDescription: 'Indispensable pour la conservation agroalimentaire, les hôpitaux et le confort moderne en Afrique, cette formation prépare des techniciens frigoristes hautement qualifiés. Vous apprendrez le cycle thermodynamique, le maniement des fluides frigorigènes, le câblage électrique des groupes et le dépannage rapide.',
+    number: 12,
+    slug: 'plomberie-installation-sanitaire',
+    title: 'Plomberie & Installation Sanitaire',
+    categoryId: 'maintenance-electricite',
+    categoryName: 'Pôle Maintenance, Électricité & Énergie',
+    poleNumber: 3,
+    shortDescription: 'Installation, raccordement, mise en service et réparation des réseaux d\'eau et des équipements sanitaires.',
+    fullDescription: 'Un métier pratique indispensable et hautement rentable. Vous apprendrez à travailler tous les matériaux de tuyauterie (cuivre, PVC, multicouche, PPR), à réaliser les soudures et raccords étanches, à installer les sanitaires modernes (douches, lavabos, WC, chauffe-eau), à concevoir les circuits d\'alimentation et d\'évacuation et à effectuer la recherche méthodique de fuites.',
     coverImage: '/images/categories/technique.jpg',
     skills: [
-      'Thermodynamique appliquée et étude des cycles frigorifiques',
-      'Brasage, dudgeonnage et façonnage des tuyauteries en cuivre',
-      'Tirage au vide, charge en fluide frigorigène et détection de fuites',
-      'Raccordement électrique et régulation thermique des installations',
-      'Diagnostic de pannes sur split-systems et chambres froides'
+      'Découpe, façonnage et soudure/brasage des tuyaux (Cuivre, PVC, Multicouche)',
+      'Pose d\'équipements sanitaires (lavabos, WC, douches) et chauffe-eau',
+      'Recherche de fuites et réparation des canalisations',
+      'Installation de réservoirs, pompes surpresseurs et réseaux gravitaires'
     ],
     careerOutcomes: [
-      'Technicien frigoriste d\'installation et de dépannage',
-      'Responsable maintenance froid en complexe hôtelier ou agroalimentaire',
-      'Installateur de systèmes de climatisation pour particuliers et bureaux',
-      'Artisan frigoriste indépendant'
+      'Plombier sanitaire indépendant ou en entreprise BTP',
+      'Installateur sanitaire et thermique',
+      'Agent d\'entretien des réseaux d\'eau d\'hôtels et résidences'
     ],
-    accessConditions: ['CEP', 'CAP', 'BEPC', 'Baccalauréat technique', 'GCE O/A Level'],
-    durationText: '1 an de formation technique intensive',
-    stageInfo: 'Stage sur chantiers réels, entreprises frigorifiques ou de maintenance industrielle.',
-    tools: ['Manifolds et manomètres', 'Pompes à vide et stations de récupération', 'Chalumeaux de brasage', 'Détecteurs électroniques'],
-    featured: true,
+    accessConditions: ['CEP', 'BEPC', 'CAP'],
+    durationText: '9 mois en centre (1 080h) + 2 mois de stage en entreprise',
+    coursCentreDuration: '9 mois (1 080 heures)',
+    stageDuration: '2 mois (8 semaines)',
+    dureeTotale: '11 mois',
+    stageInfo: 'Stage pratique de 8 semaines en entreprise de plomberie-sanitaire, société de BTP ou service de maintenance hôtelière.',
+    tools: ['Postes de soudure / chalumeaux', 'Pinces à sertir multicouche', 'Cintreuses de tubes', 'Clés serre-tubes', 'Pompes d\'épreuve'],
+    featured: false,
     sortOrder: 12,
-    seoTitle: 'Formation Froid et Climatisation à Dschang | CFP TAF',
-    seoDescription: 'Apprenez le métier de frigoriste à Dschang. Climatiseurs, chambres froides, installation et dépannage avec stage.',
-    diplomaType: 'DQP / CQP / AQP'
+    seoTitle: 'Formation Plomberie & Installation Sanitaire (DQP) à Dschang | CFP TAF',
+    seoDescription: 'Obtenez votre DQP en Plomberie et Installation Sanitaire à Dschang au CFP TAF. Réseaux d\'eau, chauffe-eau, tuyauterie et stage pratique.',
+    diplomaType: 'DQP'
   },
+
+  // =========================================================================
+  // 4. PÔLE ÉNERGIES SOLAIRE, CENTRALE ÉLECTRIQUE & GESTION
+  // =========================================================================
   {
     id: '13',
-    slug: 'plomberie-et-tuyauterie',
-    title: 'Plomberie et Tuyauterie',
-    categoryId: 'technique',
-    categoryName: 'Métiers Techniques & Énergie',
-    shortDescription: 'Réseaux de distribution d\'eau, évacuations, installations sanitaires, soudure et canalisations industrielles.',
-    fullDescription: 'Le plombier-tuyautier assure l\'acheminement de l\'eau potable, l\'évacuation des eaux usées et la pose des appareils sanitaires dans les bâtiments résidentiels, commerciaux et industriels. La formation allie plans techniques, façonnage des tubes et normes de sécurité sanitaire.',
+    number: 13,
+    slug: 'installateur-systemes-photovoltaiques',
+    title: 'Installateur de Systèmes Photovoltaïques',
+    categoryId: 'solaire-centrale-gestion',
+    categoryName: 'Pôle Énergies Solaire, Centrale Électrique & Gestion',
+    poleNumber: 4,
+    shortDescription: 'Dimensionnement, fixation, raccordement et mise en service d\'installations solaires autonomes et raccordées.',
+    fullDescription: 'Cette formation forme des techniciens hautement qualifiés dans la transition énergétique. Vous apprendrez à évaluer le bilan de puissance d\'un site, dimensionner le champ de capteurs solaires et le stockage batterie, installer les structures sur toitures et sols, raccorder onduleurs hybrides et régulateurs MPPT, et mettre en service des systèmes autonomes ou connectés au réseau.',
     coverImage: '/images/categories/technique.jpg',
     skills: [
-      'Lecture de plans d\'installations hydrauliques et sanitaires',
-      'Coupe, cintrage et assemblage de tuyaux (PVC, cuivre, multicouche, acier)',
-      'Pose et raccordement des appareils sanitaires (éviers, douches, WC, chauffe-eaux)',
-      'Mise sous pression, essais d\'étanchéité et maintenance des réseaux',
-      'Réparation de fuites et réfection de colonnes d\'évacuation'
+      'Évaluation du profil de consommation et dimensionnement des panneaux et batteries',
+      'Pose de structures d\'ancrage, montage des panneaux solaires et câblage',
+      'Raccordement des onduleurs, régulateurs et organes de protection',
+      'Mise en service, tests de charge et sécurité des circuits DC/AC'
     ],
     careerOutcomes: [
-      'Plombier installateur sanitaire bâtiment',
-      'Tuyautier en milieu industriel et tertiaire',
-      'Technicien de maintenance des réseaux hydrauliques',
-      'Entrepreneur plombier en bâtiment'
+      'Technicien installateur photovoltaïque',
+      'Monteur solaire en entreprise d\'énergie renouvelable',
+      'Entrepreneur installateur de solutions solaires autonomes'
     ],
-    accessConditions: ['CEP', 'CAP', 'BEPC', 'GCE O Level'],
-    durationText: '1 an pratique',
-    stageInfo: 'Stage d\'immersion sur des chantiers de construction et rénovation de la région.',
-    tools: ['Cintreuses de tubes', 'Pince à sertir multicouche', 'Filières à fileter', 'Chalumeaux oxyacétyléniques'],
-    featured: false,
+    accessConditions: ['BEPC', 'CAP Électricité', 'Baccalauréat', 'GCE O/A Level'],
+    durationText: '9 mois en centre (1 080h) + 3 mois de stage en entreprise',
+    coursCentreDuration: '9 mois (1 080 heures)',
+    stageDuration: '3 mois (12 semaines)',
+    dureeTotale: '12 mois',
+    stageInfo: 'Stage de 12 semaines au sein d\'une entreprise d\'énergie solaire, ONG d\'électrification rurale ou bureau d\'ingénierie énergétique.',
+    tools: ['Pinces ampèremétriques DC', 'Solarimètres', 'Outils de sertissage connecteurs MC4', 'Logiciels de dimensionnement solaire'],
+    featured: true,
     sortOrder: 13,
-    seoTitle: 'Formation Plomberie et Tuyauterie à Dschang | CFP TAF',
-    seoDescription: 'Formation pratique en plomberie sanitaire et tuyauterie à Dschang. Métier très demandé, ateliers équipés et stage.',
-    diplomaType: 'DQP / CQP / AQP'
+    seoTitle: 'Formation Installateur Photovoltaïque (Certif. Tech.) à Dschang | CFP TAF',
+    seoDescription: 'Formation Technicien Solaire Photovoltaïque à Dschang. Dimensionnement, panneaux, onduleurs hybrides, batteries et stage garanti.',
+    diplomaType: 'Certif. Tech.'
   },
   {
     id: '14',
-    slug: 'electricite',
-    title: 'Électricité (Bâtiment & Industrielle)',
-    categoryId: 'technique',
-    categoryName: 'Métiers Techniques & Énergie',
-    shortDescription: 'Câblage domestique et tertiaire, armoires de distribution, sécurité des installations et dépannage électrique.',
-    fullDescription: 'Cette formation prépare des électriciens capables de réaliser et sécuriser des installations électriques complètes conformes aux normes NFC 15-100 : pose de coffrets de distribution, disjoncteurs, éclairages, prises, commutateurs et maintenance des circuits de puissance.',
+    number: 14,
+    slug: 'maintenancier-systemes-solaires',
+    title: 'Maintenancier de Systèmes Solaires',
+    categoryId: 'solaire-centrale-gestion',
+    categoryName: 'Pôle Énergies Solaire, Centrale Électrique & Gestion',
+    poleNumber: 4,
+    shortDescription: 'Inspection, contrôle technique, diagnostic de dysfonctionnement et maintenance préventive/curative d\'installations solaires.',
+    fullDescription: 'Spécialisation pointue sur la durabilité et l\'optimisation des parcs solaires. Vous apprendrez à tester la capacité réelle des parcs de batteries, à diagnostiquer les défauts de production des cellules photovoltaïques, à remplacer les composants électroniques défectueux sur onduleurs et régulateurs, et à appliquer les protocoles de maintenance préventive pour éviter les pannes.',
     coverImage: '/images/categories/technique.jpg',
     skills: [
-      'Schémas électriques unifilaires et multifilaires',
-      'Pose de conduits, tirage de conducteurs et raccordements au tableau',
-      'Dimensionnement des protections (disjoncteurs, différentiels, mise à la terre)',
-      'Installation d\'éclairages modernes (LED, va-et-vient, télérupteurs, minuteries)',
-      'Contrôle de conformité et dépannage des coupures de courant'
+      'Contrôle de l\'état des batteries, mesure des tensions/courants et nettoyage de panneaux',
+      'Diagnostic de pannes sur onduleurs, régulateurs et bancs d\'accumulation',
+      'Remplacement des composants défectueux et optimisation de rendement',
+      'Tenue des carnets d\'entretien et maintenance curative d\'urgence'
     ],
     careerOutcomes: [
-      'Électricien d\'installation bâtiment',
-      'Technicien de maintenance électrique industrielle',
-      'Électricien de chantier sur projets immobiliers',
-      'Installateur électrique autonome'
+      'Maintenancier solaire en entreprise ou collectivité',
+      'Agent de maintenance et SAV photovoltaïque',
+      'Technicien d\'inspection et d\'audit des installations solaires'
     ],
-    accessConditions: ['CEP', 'CAP', 'BEPC', 'Baccalauréat', 'GCE O/A Level'],
-    durationText: '1 an avec stage sur chantier',
-    stageInfo: 'Immersion sur des chantiers de construction ou entreprises d\'électricité générale.',
-    tools: ['Pinces à dénuder et à sertir isolées', 'Multimètres & testeurs de terre', 'Rainureuses et perceuses'],
+    accessConditions: ['CEP', 'BEPC', 'CAP'],
+    durationText: '6 mois en centre (720h) + 2 mois de stage en entreprise',
+    coursCentreDuration: '6 mois (720 heures)',
+    stageDuration: '2 mois (8 semaines)',
+    dureeTotale: '8 mois',
+    stageInfo: 'Stage de 8 semaines en service après-vente d\'entreprises solaires ou auprès d\'opérateurs de mini-réseaux électriques.',
+    tools: ['Testeurs de batteries professionnels', 'Caméras thermiques d\'inspection solaire', 'Multimètres industriels', 'Kits d\'entretien'],
     featured: false,
     sortOrder: 14,
-    seoTitle: 'Formation Électricité Bâtiment & Tertiaire à Dschang | CFP TAF',
-    seoDescription: 'Devenez électricien qualifié à Dschang. Installation, câblage, sécurité et dépannage au CFP TAF.',
-    diplomaType: 'DQP / CQP / AQP'
+    seoTitle: 'Formation Maintenancier de Systèmes Solaires à Dschang | CFP TAF',
+    seoDescription: 'Apprenez le diagnostic et la maintenance des installations solaires et batteries au CFP TAF Dschang. 6 mois cours + 2 mois stage.',
+    diplomaType: 'Attestation'
   },
   {
     id: '15',
-    slug: 'energie-renouvelable',
-    title: 'Énergie Renouvelable (Solaire Photovoltaïque)',
-    categoryId: 'technique',
-    categoryName: 'Métiers Techniques & Énergie',
-    shortDescription: 'Dimensionnement, montage et maintenance de systèmes solaires photovoltaïques autonomes et hybrides.',
-    fullDescription: 'L\'accès à une énergie fiable est un enjeu majeur au Cameroun. Cette filière d\'avenir forme des techniciens spécialisés dans le dimensionnement, l\'installation de panneaux solaires, la gestion de bancs de batteries, le raccordement d\'onduleurs hybrides et la maintenance de parcs photovoltaïques.',
+    number: 15,
+    slug: 'pupitreur-centrale-electrique',
+    title: 'Pupitreur de Centrale Électrique',
+    categoryId: 'solaire-centrale-gestion',
+    categoryName: 'Pôle Énergies Solaire, Centrale Électrique & Gestion',
+    poleNumber: 4,
+    shortDescription: 'Conduite, surveillance et contrôle des paramètres de fonctionnement des centrales électriques depuis les salles de commande.',
+    fullDescription: 'Le pilote opérationnel des unités de production d\'électricité. Vous apprendrez à exploiter les salles de commande, à superviser les compteurs de charge, variateurs, automates et fréquencemètres, à exécuter les manœuvres critiques de couplage ou découplage des alternateurs et groupes de production sur le réseau, et à consigner scrupuleusement les alarmes et indicateurs.',
     coverImage: '/images/categories/technique.jpg',
     skills: [
-      'Calcul du bilan de puissance et dimensionnement de kits solaires',
-      'Fixation mécanique sécurisée des panneaux en toiture ou au sol',
-      'Câblage des régulateurs solaires MPPT et onduleurs/chargeurs',
-      'Configuration et entretien des parcs de batteries (Plomb, Lithium-ion)',
-      'Maintenance préventive et sécurisation contre la foudre'
+      'Surveillance des pupitres de commande, compteurs, variateurs et automates',
+      'Manœuvres de couplage/séparation des groupes électrogènes ou turbines',
+      'Gestion des alarmes, consignation des données et application des protocoles de sécurité',
+      'Conduite d\'unités de production et prévention des incidents de réseau'
     ],
     careerOutcomes: [
-      'Installateur de systèmes solaires photovoltaïques',
-      'Technicien de maintenance solaire pour sites isolés',
-      'Conseiller technique en énergies propres',
-      'Entrepreneur dans le secteur de l\'énergie solaire'
+      'Pupitreur de centrale électrique (thermique, hydroélectrique, solaire)',
+      'Opérateur de salle de commande électrique en industrie',
+      'Technicien d\'exploitation de sous-stations et postes de transformation'
     ],
-    accessConditions: ['BEPC', 'CAP Électricité', 'Baccalauréat', 'GCE O/A Level'],
-    durationText: '1 an de formation spécialisée',
-    stageInfo: 'Stage auprès d\'entreprises d\'énergie solaire, ONG d\'électrification rurale ou bureaux d\'études.',
-    tools: ['Pince ampèremétrique DC', 'Solarimètres / Luxmètres', 'Outils de sertissage connecteurs MC4', 'Logiciels de dimensionnement'],
+    accessConditions: ['Baccalauréat technique (F3, TI, C, D)', 'GCE A Level technique'],
+    durationText: '9 mois en centre (1 080h) + 3 mois de stage en entreprise',
+    coursCentreDuration: '9 mois (1 080 heures)',
+    stageDuration: '3 mois (12 semaines)',
+    dureeTotale: '12 mois',
+    stageInfo: 'Stage de 12 semaines en centrale de production d\'énergie, grande industrie manufacturière ou société de distribution d\'électricité.',
+    tools: ['Pupitres de supervision SCADA', 'Automates programmables', 'Enregistreurs de paramètres réseau', 'Simulateurs de conduite'],
     featured: true,
     sortOrder: 15,
-    seoTitle: 'Formation Énergie Renouvelable & Solaire à Dschang | CFP TAF',
-    seoDescription: 'Apprenez l\'installation solaire photovoltaïque à Dschang. Dimensionnement, onduleurs, batteries et stage professionnel.',
-    diplomaType: 'DQP / CQP'
+    seoTitle: 'Formation Pupitreur de Centrale Électrique (Certif. Tech.) à Dschang | CFP TAF',
+    seoDescription: 'Devenez Pupitreur de Centrale Électrique certifié au CFP TAF Dschang. Salles de commande, couplage turbines, automates et stage.',
+    diplomaType: 'Certif. Tech.'
   },
-
-  // E. Beauté & Esthétique
   {
     id: '16',
-    slug: 'cosmetique-et-esthetique',
-    title: 'Cosmétique et Esthétique',
-    categoryId: 'esthetique',
-    categoryName: 'Beauté & Esthétique',
-    shortDescription: 'Soins du visage et du corps, maquillage professionnel, manucure-pédicure et formulation cosmétique.',
-    fullDescription: 'Le secteur de la beauté et du bien-être est en plein essor. Cette formation rigoureuse vous enseigne l\'anatomie de la peau, les protocoles de soins du visage et du corps, le maquillage professionnel (mariée, événement, studio photo), la prothésie ongulaire et les bases de la cosmétologie naturelle.',
-    coverImage: '/images/categories/esthetique.jpg',
+    number: 16,
+    slug: 'comptabilite-informatisee-gestion',
+    title: 'Comptabilité Informatisée & Gestion',
+    categoryId: 'solaire-centrale-gestion',
+    categoryName: 'Pôle Énergies Solaire, Centrale Électrique & Gestion',
+    poleNumber: 4,
+    shortDescription: 'Application des règles comptables OHADA, tenue de livres financiers et utilisation des progiciels comptables.',
+    fullDescription: 'Une formation rigoureuse et très demandée par toutes les entreprises. Vous apprendrez la saisie et le classement des pièces comptables, la tenue des journaux de caisse et de banque, le suivi des facturations et relances, l\'élaboration des bulletins de paie et déclarations sociales (CNPS, DIP), et l\'utilisation experte des logiciels de comptabilité de référence (Sage Saari).',
+    coverImage: '/images/categories/administration.jpg',
     skills: [
-      'Diagnostic cutané et protocoles de soins du visage adaptés',
-      'Techniques de maquillage professionnel (jour, soir, mariée, shooting)',
-      'Manucure, pédicure, modelage des ongles et pose de vernis gel',
-      'Soins corporels, gommages, enveloppements et massages relaxants',
-      'Hygiène stricte, stérilisation des instruments et gestion d\'un institut'
+      'Application des règles comptables OHADA, tenue de livres financiers et journaux',
+      'Saisie des pièces comptables, tenue de caisse/banque et facturation',
+      'Gestion de la paie, déclarations fiscales et sociales (DIP, CNPS)',
+      'Utilisation avancée des logiciels comptables (Sage Saari Comptabilité, Excel)'
     ],
     careerOutcomes: [
-      'Esthéticienne professionnelle en institut ou spa',
-      'Maquilleuse professionnelle (Make-up artist événementiel & cinéma)',
-      'Conseillère experte en produits cosmétiques',
-      'Créatrice d\'un salon d\'esthétique ou d\'une marque de soins'
+      'Aide-comptable / Assistant comptable en PME ou cabinet',
+      'Gestionnaire de paie et facturation',
+      'Caissier d\'entreprise ou chargé des opérations financières'
     ],
-    accessConditions: ['CEP', 'CAP', 'BEPC', 'Baccalauréat', 'GCE O/A Level'],
-    durationText: '1 an de formation pratique en atelier',
-    stageInfo: 'Stage d\'application en institut de beauté de renom, spa ou salon esthétique partenaire.',
-    tools: ['Appareils de soins du visage (vapeur d\'ozone, haute fréquence)', 'Kits maquillage pro haute définition', 'Tables de soins et lampes loupes'],
+    accessConditions: ['BEPC', 'CAP Commercial', 'Baccalauréat (G2, CG, ACC)', 'GCE O/A Level Commercial'],
+    durationText: '9 mois en centre (1 080h) + 3 mois de stage en entreprise',
+    coursCentreDuration: '9 mois (1 080 heures)',
+    stageDuration: '3 mois (12 semaines)',
+    dureeTotale: '12 mois',
+    stageInfo: 'Stage de 12 semaines au sein d\'un cabinet d\'expertise comptable, service financier d\'entreprise ou institution de microfinance.',
+    tools: ['Sage Saari Comptabilité 100', 'Sage Paie & RH', 'Microsoft Excel avancé', 'Plateformes de télédéclarations fiscales'],
     featured: true,
     sortOrder: 16,
-    seoTitle: 'Formation Cosmétique et Esthétique à Dschang | CFP TAF',
-    seoDescription: 'Devenez esthéticienne et maquilleuse professionnelle à Dschang au CFP TAF. Soins, make-up, bien-être et stage certifié.',
-    diplomaType: 'DQP / CQP / AQP'
+    seoTitle: 'Formation Comptabilité Informatisée & Gestion (DQP) à Dschang | CFP TAF',
+    seoDescription: 'Obtenez votre DQP en Comptabilité Informatisée à Dschang au CFP TAF. Système OHADA, Sage Saari, paie, fiscalité et stage en entreprise.',
+    diplomaType: 'DQP'
+  },
+
+  // =========================================================================
+  // 5. PÔLE SECRÉTARIAT, ADMINISTRATION & RÉCAPITULATIF
+  // =========================================================================
+  {
+    id: '17',
+    number: 17,
+    slug: 'secretariat-bureautique-bilingue-comptable',
+    title: 'Secrétariat (Bureautique, Bilingue, Comptable)',
+    categoryId: 'secretariat-administration',
+    categoryName: 'Pôle Secrétariat & Administration',
+    poleNumber: 5,
+    shortDescription: 'Exécution des travaux administratifs, rédaction de correspondances, accueil des usagers et opérations de gestion de niveau 1.',
+    fullDescription: 'Une formation complète offrant un profil polyvalent hautement attractif sur le marché du travail camerounais et international. Vous développerez une vitesse de saisie dactylographique professionnelle, une excellente expression écrite et orale bilingue (français/anglais), le traitement du courrier et la tenue des opérations de caisse et de trésorerie élémentaires.',
+    coverImage: '/images/categories/administration.jpg',
+    skills: [
+      'Saisie rapide, mise en page et rédaction de documents administratifs/commerciaux',
+      'Accueil physique/téléphonique bilingue (français/anglais) et gestion du courrier',
+      'Tenue des journaux de trésorerie de base et archivage méthodique',
+      'Maîtrise des logiciels bureautiques de référence (Word, Excel, PowerPoint)'
+    ],
+    careerOutcomes: [
+      'Secrétaire bureautique en entreprise ou administration',
+      'Secrétaire bilingue français / anglais',
+      'Secrétaire comptable en PME ou cabinet professionnel'
+    ],
+    accessConditions: ['BEPC', 'CAP', 'Baccalauréat', 'GCE O/A Level'],
+    durationText: '9 mois en centre (1 080h) + 3 mois de stage en entreprise',
+    coursCentreDuration: '9 mois (1 080 heures)',
+    stageDuration: '3 mois (12 semaines)',
+    dureeTotale: '12 mois',
+    stageInfo: 'Stage de 12 semaines au secrétariat d\'une entreprise bilingue, organisation internationale, ONG ou administration.',
+    tools: ['Suite Microsoft Office 365 (Word, Excel, PowerPoint)', 'Logiciels de dactylographie rapide', 'Messageries professionnelles', 'Outils d\'archivage'],
+    featured: true,
+    sortOrder: 17,
+    seoTitle: 'Formation Secrétariat Bilingue & Comptable (DQP) à Dschang | CFP TAF',
+    seoDescription: 'Formation DQP Secrétariat Bureautique, Bilingue et Comptable à Dschang au CFP TAF. 9 mois cours + 3 mois stage en entreprise.',
+    diplomaType: 'DQP'
+  },
+  {
+    id: '18',
+    number: 18,
+    slug: 'secretariat-de-direction',
+    title: 'Secrétariat de Direction',
+    categoryId: 'secretariat-administration',
+    categoryName: 'Pôle Secrétariat & Administration',
+    poleNumber: 5,
+    shortDescription: 'Assistance stratégique aux dirigeants, coordination de projets, gestion des flux d\'information et organisation logistique.',
+    fullDescription: 'Le collaborateur direct des cadres dirigeants et directeurs généraux. Cette formation d\'élite vous prépare à organiser l\'agenda exécutif, planifier les conseils et séminaires d\'entreprise, gérer les flux documentaires confidentiels, rédiger des comptes rendus de réunions décisionnelles et assurer l\'interface diplomatique et courtoise avec les partenaires stratégiques.',
+    coverImage: '/brand/section-f.png',
+    skills: [
+      'Préparation et suivi des dossiers de projets, rédaction de procès-verbaux et rapports',
+      'Organisation de réunions, séminaires et gestion des déplacements professionnels',
+      'Veille de l\'information, gestion documentaire et traitement des urgences',
+      'Assistance managériale confidentielle et coordination d\'équipe de direction'
+    ],
+    careerOutcomes: [
+      'Secrétaire de direction générale',
+      'Assistant(e) de manager ou de direction générale',
+      'Office manager et coordinateur(trice) administratif(ve)'
+    ],
+    accessConditions: ['Baccalauréat (toutes séries)', 'GCE A Level'],
+    durationText: '9 mois en centre (1 080h) + 3 mois de stage en entreprise',
+    coursCentreDuration: '9 mois (1 080 heures)',
+    stageDuration: '3 mois (12 semaines)',
+    dureeTotale: '12 mois',
+    stageInfo: 'Stage de 12 semaines à la direction générale d\'une grande société, institution bancaire ou organisation de premier plan.',
+    tools: ['Microsoft 365 Business (Outlook, Word, Excel, Teams)', 'Outils collaboratifs de gestion de projets', 'Outils de visio-conférence haute sécurité'],
+    featured: true,
+    sortOrder: 18,
+    seoTitle: 'Formation Secrétariat de Direction (DQP) à Dschang | CFP TAF',
+    seoDescription: 'Devenez Secrétaire de Direction qualifié (DQP MINEFOP) au CFP TAF Dschang. Assistance exécutive, gestion de projets et stage de direction.',
+    diplomaType: 'DQP'
   }
 ];
 
@@ -600,17 +745,17 @@ export const DIPLOMAS = [
   {
     code: 'DQP',
     title: 'Diplôme de Qualification Professionnelle',
-    desc: 'Titre officiel sanctionnant une formation professionnelle complète et opérationnelle, délivré conformément aux normes nationales de la formation professionnelle.'
+    desc: 'Titre officiel national sanctionnant une formation professionnelle complète et opérationnelle, délivré sous la tutelle du MINEFOP.'
   },
   {
-    code: 'CQP',
-    title: 'Certificat de Qualification Professionnelle',
-    desc: 'Certificat validant la maîtrise de compétences techniques ciblées directement requises par le marché de l\'emploi.'
+    code: 'Certif. Tech.',
+    title: 'Certificat Technique (Niveau Technicien)',
+    desc: 'Certification technique attestant de la maîtrise opérationnelle d\'installations et d\'infrastructures techniques spécialisées.'
   },
   {
-    code: 'AQP',
-    title: 'Attestation de Qualification Professionnelle',
-    desc: 'Attestation confirmant les acquis pratiques et la participation active au cycle de qualification professionnelle.'
+    code: 'Attestation',
+    title: 'Attestation / Qualification Professionnelle',
+    desc: 'Qualification validant l\'acquisition rigoureuse de compétences pratiques directement adaptées aux besoins immédiats du marché de l\'emploi.'
   }
 ];
 
@@ -621,5 +766,5 @@ export const ACCESS_LEVELS = [
   'Baccalauréat',
   'GCE O Level',
   'GCE A Level',
-  'Autre / Reconversion'
+  'Autre / Reconversion Professionnelle'
 ];

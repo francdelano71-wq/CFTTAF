@@ -11,7 +11,7 @@ export const AudiovisuelFocus: React.FC<AudiovisuelFocusProps> = ({ onNavigate }
       icon: Camera,
       title: 'Prise de Vue & Studio Photo',
       desc: 'Maîtrise complète des boîtiers pros, de l\'éclairage de studio, du portrait et du reportage de terrain.',
-      slug: 'photographie-professionnelle'
+      slug: 'photographe-professionnel'
     },
     {
       icon: Mic2,
@@ -21,15 +21,15 @@ export const AudiovisuelFocus: React.FC<AudiovisuelFocusProps> = ({ onNavigate }
     },
     {
       icon: Film,
-      title: 'Montage Vidéo & Post-Production',
+      title: 'Montage Vidéo & Réalisation',
       desc: 'Dérushage, découpage narratif, étalonnage DaVinci Resolve et habillage visuel pour le cinéma et la télévision.',
-      slug: 'montage-audiovisuel'
+      slug: 'montage-audiovisuel-realisation'
     },
     {
       icon: ShieldAlert,
-      title: 'Cybersécurité & Défense des Réseaux',
-      desc: 'Sécurisation des architectures informatiques, pare-feu, détection des intrusions et audits préventifs.',
-      slug: 'cyber-securite'
+      title: 'Maintenance Réseau & Sécurité',
+      desc: 'Déploiement d\'infrastructures d\'entreprise, câblage, brassage, pare-feu, VPN et supervision du trafic.',
+      slug: 'maintenance-reseau-informatique'
     }
   ];
 

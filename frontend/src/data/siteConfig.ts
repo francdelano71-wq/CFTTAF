@@ -88,7 +88,7 @@ export const ADMISSION_STEPS = [
   {
     step: '01',
     title: 'Choisir sa filière',
-    description: 'Explorez notre catalogue de 16 formations et identifiez le métier qui correspond à vos aspirations et compétences.'
+    description: 'Explorez notre catalogue de 18 formations et identifiez le métier qui correspond à vos aspirations et compétences.'
   },
   {
     step: '02',

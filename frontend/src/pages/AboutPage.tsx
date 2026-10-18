@@ -167,7 +167,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               onClick={() => onNavigate('/formations')}
               className="btn btn-primary btn-lg"
             >
-              <span>Découvrir l'ensemble des 16 formations</span>
+              <span>Découvrir l'ensemble des 18 formations</span>
               <ArrowRight size={18} />
             </button>
           </div>
